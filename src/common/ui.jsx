@@ -6,18 +6,6 @@ export const Logo = ({ size = "sm" }) => {
 
   return (
     <span className="flex flex-col items-center">
-      <svg
-        viewBox="0 0 100 100"
-        fill="currentColor"
-        aria-hidden="true"
-        className={
-          large ? "mb-3 h-10 w-10 sm:h-12 sm:w-12" : "mb-1.5 h-7 w-7 md:h-8 md:w-8"
-        }
-      >
-        <path d="M10 10H90L10 90Z" />
-        <path transform="translate(6 6)" d="M90 10V90H10Z" />
-      </svg>
-
       <span
         className={
           large
