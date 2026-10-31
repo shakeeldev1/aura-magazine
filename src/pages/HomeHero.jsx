@@ -69,7 +69,7 @@ const HomeHero = () => {
               />
             </div>
 
-            <figcaption className="absolute inset-x-4 bottom-4 bg-ivory/95 px-4 py-3 sm:inset-x-6 sm:bottom-6 sm:px-5 sm:py-4">
+            <figcaption className="absolute left-4 top-4 bg-ivory/95 px-4 py-3 sm:left-6 sm:top-6 sm:px-5 sm:py-4">
               <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
                 {t.caption}
               </span>

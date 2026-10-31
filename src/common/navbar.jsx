@@ -149,7 +149,7 @@ const Navbar = () => {
       <header className="sticky top-0 z-50 border-b border-ink/10 bg-ivory/95 text-ink backdrop-blur-md">
         {/* Announcement strip */}
         <div className="bg-ink px-4 py-2 text-center font-sans text-[10px] tracking-[0.3em] text-ivory/85 uppercase">
-          <span>Insolite x Khim Asriel</span>
+          <span>Insolite Magazine x Khim Asriel</span>
           <span aria-hidden="true" className="mx-3 hidden text-ivory/35 sm:inline">
             |
           </span>
@@ -193,7 +193,7 @@ const Navbar = () => {
 
         {/* Category navigation (desktop) */}
         <nav aria-label="Categories" className="hidden border-t border-ink/10 md:block">
-          <ul className="mx-auto flex max-w-[1440px] items-center justify-center gap-14 px-12 lg:gap-20">
+          <ul className="mx-auto flex max-w-[1440px] items-center justify-center gap-8 px-12 lg:gap-16">
             {categories.map((item) => (
               <li key={item.key}>
                 <CategoryLink item={item} label={item.label[lang]} />

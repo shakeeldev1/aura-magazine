@@ -1,15 +1,17 @@
 // Shared site navigation. Used by the header and the footer.
 export const categories = [
-  { key: "fashion", label: { EN: "Fashion", FR: "Mode" }, to: "/fashion" },
   { key: "beauty", label: { EN: "Beauty", FR: "Beauté" }, to: "/#beauty" },
-  { key: "decor", label: { EN: "Decor", FR: "Décor" }, to: "/decor" },
-  { key: "food", label: { EN: "Food", FR: "Gastronomie" }, to: "/food" },
+  { key: "fashion", label: { EN: "Fashion", FR: "Mode" }, to: "/fashion" },
+  { key: "lifestyle", label: { EN: "Lifestyle", FR: "Lifestyle" }, to: "/lifestyle" },
+  { key: "gourmet", label: { EN: "Gourmet", FR: "Gourmet" }, to: "/gourmet" },
+  { key: "design", label: { EN: "Design", FR: "Design" }, to: "/design" },
 ];
 
 // Sections that are linked from the site but do not have content yet.
 export const forthcomingPages = {
-  decor: { title: { EN: "Decor", FR: "Décor" } },
-  food: { title: { EN: "Food", FR: "Gastronomie" } },
+  lifestyle: { title: { EN: "Lifestyle", FR: "Lifestyle" } },
+  gourmet: { title: { EN: "Gourmet", FR: "Gourmet" } },
+  design: { title: { EN: "Design", FR: "Design" } },
   about: { title: { EN: "About Insolite", FR: "À propos d'Insolite" } },
   privacy: { title: { EN: "Privacy Policy", FR: "Confidentialité" } },
   terms: { title: { EN: "Terms & Conditions", FR: "Conditions générales" } },
