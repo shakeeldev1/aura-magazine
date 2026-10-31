@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useLanguage } from "../common/language";
-import { resolveImage, slugify } from "../common/stories";
+import { localizeStory, resolveImage, slugify } from "../common/stories";
 import { StoryImage } from "../common/ui";
 import { useDocumentTitle } from "../common/useDocumentTitle";
 import { fashionStories as homeFashionStories } from "../data/homeFashionStories";
@@ -45,7 +45,7 @@ const ArticlePage = () => {
   const { slug } = useParams();
   const { lang } = useLanguage();
   const t = copy[lang];
-  const story = findStory(slug);
+  const story = localizeStory(findStory(slug), lang);
 
   useDocumentTitle(story?.title);
 

@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../common/language";
 import { storyPath } from "../common/stories";
 import { StoryImage } from "../common/ui";
-import { beautyStories } from "../data/homeBeautyStories";
+import { beautyStories as baseStories } from "../data/homeBeautyStories";
+import { useLocalizedStories } from "../common/useLocalizedStories";
 
 const copy = {
   EN: {
@@ -24,6 +25,7 @@ const copy = {
 const HomeBeauty = () => {
   const { lang } = useLanguage();
   const t = copy[lang];
+  const beautyStories = useLocalizedStories(baseStories);
 
   return (
     <section id="beauty" className="bg-ivory py-20 md:py-28">

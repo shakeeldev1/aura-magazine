@@ -4,7 +4,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLanguage } from "../common/language";
 import { storyPath } from "../common/stories";
 import { StoryImage } from "../common/ui";
-import { fashionStories } from "../data/homeFashionStories";
+import { fashionStories as baseStories } from "../data/homeFashionStories";
+import { useLocalizedStories } from "../common/useLocalizedStories";
 
 const copy = {
   EN: {
@@ -44,6 +45,7 @@ const isAtEnd = (track) =>
 const HomeFashion = () => {
   const { lang } = useLanguage();
   const t = copy[lang];
+  const fashionStories = useLocalizedStories(baseStories);
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -96,7 +98,7 @@ const HomeFashion = () => {
     } else {
       scrollToCard(Math.min(activeIndex + 1, fashionStories.length - 1));
     }
-  }, [activeIndex, scrollToCard]);
+  }, [activeIndex, scrollToCard, fashionStories.length]);
 
   const showPrevious = () => {
     scrollToCard(Math.max(activeIndex - 1, 0));

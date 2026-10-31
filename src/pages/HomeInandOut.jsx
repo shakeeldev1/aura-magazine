@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../common/language";
 import { storyPath } from "../common/stories";
 import { StoryImage } from "../common/ui";
-import { inAndOutStories } from "../data/homeInAndOutStories";
+import { inAndOutStories as baseStories } from "../data/homeInAndOutStories";
+import { useLocalizedStories } from "../common/useLocalizedStories";
 
 const copy = {
   EN: { eyebrow: "The Style Report", titleA: "In", titleB: "Out" },
@@ -12,6 +13,7 @@ const copy = {
 const HomeInandOut = () => {
   const { lang } = useLanguage();
   const t = copy[lang];
+  const inAndOutStories = useLocalizedStories(baseStories);
 
   return (
     <section id="in-out" className="bg-ink py-20 text-ivory md:py-28">

@@ -9,6 +9,7 @@ const copy = {
     title: "MOOD.",
     body: "Trendy looks, funny moments, and unfiltered style — because fashion isn’t just what you wear, it’s how you feel.",
     cta: "Explore the edit",
+    slogan: "Be bold / Be you / Be Insolite",
     caption: "The Main Character",
     mainAlt: "The main character, a fashion editorial portrait",
     sideAlt: "Funny outfits, a playful street look",
@@ -19,6 +20,7 @@ const copy = {
     title: "HUMEUR.",
     body: "Looks tendance, moments drôles et style sans filtre — parce que la mode ne se résume pas à ce que l’on porte, c’est la façon dont on se sent.",
     cta: "Découvrir la sélection",
+    slogan: "Soyez audacieux / Soyez vous / Soyez Insolite",
     caption: "Le personnage principal",
     mainAlt: "Le personnage principal, portrait éditorial de mode",
     sideAlt: "Tenues amusantes, look de rue espiègle",
@@ -89,7 +91,7 @@ const HomeHero = () => {
       <div className="mx-auto flex max-w-[1440px] flex-col gap-3 border-t border-ink/15 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
         <p className="eyebrow text-ink/70">Insolite Magazine x Khim Asriel</p>
 
-        <p className="eyebrow text-ink/70">Be bold &nbsp;/&nbsp; Be you &nbsp;/&nbsp; Be Insolite</p>
+        <p className="eyebrow text-ink/70">{t.slogan}</p>
       </div>
     </section>
   );

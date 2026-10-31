@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../common/language";
 import { storyPath } from "../common/stories";
 import { StoryImage } from "../common/ui";
-import { latestStories } from "../data/homeLatestStories";
+import { latestStories as baseStories } from "../data/homeLatestStories";
+import { useLocalizedStories } from "../common/useLocalizedStories";
 
 const copy = {
   EN: {
@@ -20,6 +21,7 @@ const copy = {
 const HomeLatestGrid = () => {
   const { lang } = useLanguage();
   const t = copy[lang];
+  const latestStories = useLocalizedStories(baseStories);
 
   return (
     <section id="latest" className="bg-ivory py-20 md:py-28">

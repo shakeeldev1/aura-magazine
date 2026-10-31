@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useLanguage } from "../common/language";
 import { resolveImage, storyPath } from "../common/stories";
+import { useLocalizedStories } from "../common/useLocalizedStories";
 import { StoryImage } from "../common/ui";
 import { useDocumentTitle } from "../common/useDocumentTitle";
 
@@ -67,9 +68,10 @@ const FashionSubnav = ({ t }) => {
   );
 };
 
-const FashionStoryPage = ({ eyebrow, title, description, stories, closing }) => {
+const FashionStoryPage = ({ eyebrow, title, description, stories: baseStories, closing }) => {
   const { lang } = useLanguage();
   const t = copy[lang];
+  const stories = useLocalizedStories(baseStories);
   const count = String(stories.length).padStart(2, "0");
 
   useDocumentTitle(title);
