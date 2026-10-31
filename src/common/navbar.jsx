@@ -86,6 +86,7 @@ const MobileMenu = ({ onClose, lang, t }) => (
         <button
           type="button"
           onClick={onClose}
+          autoFocus
           aria-label={t.closeMenu}
           className="-mr-2 p-2"
         >

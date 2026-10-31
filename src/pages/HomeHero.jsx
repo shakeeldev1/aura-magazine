@@ -43,6 +43,7 @@ const HomeHero = () => {
           </p>
 
           <h1 className="font-serif text-[clamp(5rem,15vw,11.5rem)] leading-[0.8] tracking-[-0.03em] motion-safe:animate-fade-up">
+            <span className="sr-only">{t.lead} </span>
             <span className="italic">{t.title}</span>
           </h1>
 
