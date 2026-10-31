@@ -1,31 +1,37 @@
 import { useState } from "react";
 import { useLanguage } from "./language";
 
+// Shapes cut from the client's reference images. The mask lets them take the text colour,
+// so they work on both light and dark backgrounds.
+const maskStyle = (src) => ({
+  WebkitMaskImage: `url(${src})`,
+  maskImage: `url(${src})`,
+  WebkitMaskSize: "contain",
+  maskSize: "contain",
+  WebkitMaskRepeat: "no-repeat",
+  maskRepeat: "no-repeat",
+  WebkitMaskPosition: "center",
+  maskPosition: "center",
+});
+
 export const Logo = ({ size = "sm" }) => {
   const large = size === "lg";
 
   return (
     <span className="flex flex-col items-center">
-      <svg
-        viewBox="0 0 100 100"
-        fill="currentColor"
+      <span
         aria-hidden="true"
         className={
-          large ? "mb-3 h-10 w-10 sm:h-12 sm:w-12" : "mb-1.5 h-7 w-7 md:h-8 md:w-8"
+          large ? "mb-3 block h-10 w-6 bg-current sm:h-12 sm:w-7" : "mb-1 block h-6 w-[15px] bg-current md:h-7 md:w-[17px]"
         }
-      >
-        <path d="M29 36C29 10 70 8 70 32C70 46 58 50 46 60C38 62 32 66 38 71L42.6 75" fill="none" stroke="currentColor" strokeWidth="15" />
-        <path d="M42.6 72L54.6 80.5L50 96H35L30.5 80.5Z" />
-      </svg>
+        style={maskStyle("/question-mark.png")}
+      />
       <span
-        className={
-          large
-            ? "pl-[0.14em] font-serif font-bold text-5xl leading-none tracking-[0.14em] uppercase sm:text-6xl"
-            : "pl-[0.14em] font-serif font-bold text-2xl leading-none tracking-[0.14em] uppercase md:text-3xl"
-        }
-      >
-        INSOLITE
-      </span>
+        role="img"
+        aria-label="INSOLITE"
+        className={large ? "block h-14 bg-current sm:h-16" : "block h-8 bg-current md:h-10"}
+        style={{ ...maskStyle("/wordmark-insolite.png"), aspectRatio: "4.3" }}
+      />
 
       <span
         className={
