@@ -14,8 +14,8 @@ export const Logo = ({ size = "sm" }) => {
           large ? "mb-3 h-10 w-10 sm:h-12 sm:w-12" : "mb-1.5 h-7 w-7 md:h-8 md:w-8"
         }
       >
-        <path d="M14 88V48A32 32 0 0 1 46 16V88Z" />
-        <path transform="translate(0 10)" d="M54 16A32 32 0 0 1 86 48V88H54Z" />
+        <path d="M10 10H90L10 90Z" />
+        <path transform="translate(6 6)" d="M90 10V90H10Z" />
       </svg>
 
       <span
