@@ -33,7 +33,7 @@ const HomeHero = () => {
 
   return (
     <section className="bg-ivory">
-      <div className="mx-auto grid max-w-[1440px] items-end gap-14 px-5 pt-12 pb-16 sm:px-8 md:pt-16 md:pb-24 lg:grid-cols-12 lg:gap-10 lg:px-12 lg:pt-20">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-end gap-14 px-5 pt-12 pb-16 sm:px-8 md:pt-16 md:pb-24 lg:grid-cols-12 lg:gap-10 lg:px-12 lg:pt-20">
         {/* Copy */}
         <div className="order-2 lg:order-1 lg:col-span-5 lg:pb-10">
           <p className="eyebrow motion-safe:animate-fade-up">{t.eyebrow}</p>

@@ -35,7 +35,7 @@ const HomeBrandSpotlight = () => {
 
   return (
     <section className="bg-linen">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-2 md:gap-16 md:py-28 lg:px-12">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-2 md:gap-16 md:py-28 lg:px-12">
         {/* Image */}
         <div className="relative mx-auto w-full max-w-xl">
           <div className="aspect-[4/5] overflow-hidden bg-ivory">
