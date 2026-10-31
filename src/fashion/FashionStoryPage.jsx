@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useLanguage } from "../common/language";
+import { resolveImage, storyPath } from "../common/stories";
 import { StoryImage } from "../common/ui";
 import { useDocumentTitle } from "../common/useDocumentTitle";
 
@@ -23,12 +24,6 @@ const copy = {
     count: "Mode",
   },
 };
-
-// Stories are either full image URLs or Unsplash photo IDs.
-const imageUrl = (image) =>
-  image.startsWith("http")
-    ? image
-    : `https://images.unsplash.com/${image}?auto=format&fit=crop&w=900&q=85`;
 
 const FashionSubnav = ({ t }) => {
   const sections = [
@@ -110,10 +105,10 @@ const FashionStoryPage = ({ eyebrow, title, description, stories, closing }) => 
 
         <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4">
           {stories.map((story, index) => (
-            <article key={`${story.title}-${index}`} className="group min-w-0">
+            <Link key={`${story.title}-${index}`} to={storyPath(story)} className="group min-w-0">
               <div className="aspect-[3/4] overflow-hidden bg-linen">
                 <StoryImage
-                  src={imageUrl(story.image)}
+                  src={resolveImage(story.image)}
                   alt={story.title}
                   eager={index < 4}
                   className="h-full w-full object-cover img-tone"
@@ -129,7 +124,7 @@ const FashionStoryPage = ({ eyebrow, title, description, stories, closing }) => 
                   {story.title}
                 </h2>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

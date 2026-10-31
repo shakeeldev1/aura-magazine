@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import { useLanguage } from "../common/language";
+import { storyPath } from "../common/stories";
 import { StoryImage } from "../common/ui";
+import { latestStories } from "../data/homeLatestStories";
 
 const copy = {
   EN: {
@@ -13,45 +16,6 @@ const copy = {
     edition: "Édition style mondial",
   },
 };
-
-const latestStories = [
-  {
-    category: "PARIS FASHION",
-    title: "The Effortless Elegance of Parisian Street Style",
-    image:
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    category: "MILAN RUNWAY",
-    title: "Bold Silhouettes Taking Over the Fashion Scene",
-    image:
-      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    category: "LONDON STYLE",
-    title: "The New Generation of British Fashion",
-    image:
-      "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    category: "NEW YORK FASHION",
-    title: "Street Style That Makes Its Own Rules",
-    image:
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    category: "COUTURE",
-    title: "The Art of Dressing With Confidence",
-    image:
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    category: "GLOBAL TRENDS",
-    title: "International Looks Defining Modern Luxury",
-    image:
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=85",
-  },
-];
 
 const HomeLatestGrid = () => {
   const { lang } = useLanguage();
@@ -76,7 +40,7 @@ const HomeLatestGrid = () => {
         {/* Grid */}
         <div className="mt-14 grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {latestStories.map((story) => (
-            <article key={story.category} className="group">
+            <Link key={story.category} to={storyPath(story)} className="group">
               <div className="aspect-[4/5] overflow-hidden bg-linen">
                 <StoryImage
                   src={story.image}
@@ -96,7 +60,7 @@ const HomeLatestGrid = () => {
 
                 <div className="mt-5 h-px w-12 bg-ink transition-all duration-500 group-hover:w-20" />
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

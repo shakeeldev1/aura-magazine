@@ -9,6 +9,7 @@ import Home from "./pages/home";
 import Forthcoming from "./pages/Forthcoming";
 import NotFound from "./pages/NotFound";
 import Fashion from "./fashion/fashion";
+import ArticlePage from "./pages/ArticlePage";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
                   element={<Forthcoming page={page} />}
                 />
               ))}
+
+              <Route path="/stories/:slug" element={<ArticlePage />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
