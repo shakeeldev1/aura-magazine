@@ -1,299 +1,191 @@
-import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "./language";
+import { categories } from "./navigation";
+import NewsletterForm from "./NewsletterForm";
+import { LanguageSwitch, Logo } from "./ui";
+
+const currentYear = new Date().getFullYear();
+
+const content = {
+  EN: {
+    tagline: "A Different Point of View.",
+    description:
+      "An editorial universe exploring fashion, beauty, interiors and gastronomy through a distinctive lens.",
+    explore: "Explore",
+    magazine: "The Magazine",
+    about: "About Aura",
+    inout: "In & Out",
+    contact: "Contact",
+    newsletter: "The Aura Letter",
+    newsletterText:
+      "Discover our selection of culture, style and inspiration.",
+    placeholder: "Your email address",
+    subscribe: "Subscribe",
+    privacy: "By subscribing, you agree to our Privacy Policy.",
+    success: "Thank you. You are now on the list.",
+    rights: "All rights reserved.",
+    policy: "Privacy Policy",
+    terms: "Terms & Conditions",
+  },
+  FR: {
+    tagline: "Un autre point de vue.",
+    description:
+      "Un univers éditorial dédié à la mode, la beauté, la décoration et la gastronomie.",
+    explore: "Explorer",
+    magazine: "Le magazine",
+    about: "À propos d'Aura",
+    inout: "In & Out",
+    contact: "Contact",
+    newsletter: "La lettre Aura",
+    newsletterText:
+      "Découvrez notre sélection de culture, de style et d'inspiration.",
+    placeholder: "Votre adresse e-mail",
+    subscribe: "S'inscrire",
+    privacy:
+      "En vous inscrivant, vous acceptez notre politique de confidentialité.",
+    success: "Merci. Vous êtes désormais sur la liste.",
+    rights: "Tous droits réservés.",
+    policy: "Confidentialité",
+    terms: "Conditions générales",
+  },
+};
+
+const columnTitle =
+  "font-sans text-[10px] font-medium tracking-[0.3em] text-ivory uppercase";
+
+const footerLink =
+  "transition-colors duration-300 hover:text-ivory";
 
 const Footer = () => {
-  const [lang, setLang] = useState("EN");
-  const [email, setEmail] = useState("");
-
-  const content = {
-    EN: {
-      tagline: "A Different Point of View.",
-      description:
-        "An editorial universe exploring fashion, beauty, interiors and gastronomy through a distinctive lens.",
-      explore: "EXPLORE",
-      categories: ["Fashion", "Beauty", "Decor", "Food"],
-      magazine: "THE MAGAZINE",
-      about: "About Aura",
-      inout: "In & Out",
-      contact: "Contact",
-      newsletter: "THE AURA LETTER",
-      newsletterText:
-        "Discover our selection of culture, style and inspiration.",
-      placeholder: "Your email address",
-      subscribe: "SUBSCRIBE",
-      privacy: "By subscribing, you agree to our Privacy Policy.",
-      rights: "All rights reserved.",
-      policy: "Privacy Policy",
-      terms: "Terms & Conditions",
-    },
-    FR: {
-      tagline: "Un autre point de vue.",
-      description:
-        "Un univers éditorial dédié à la mode, la beauté, la décoration et la gastronomie.",
-      explore: "EXPLORER",
-      categories: ["Mode", "Beauté", "Décor", "Gastronomie"],
-      magazine: "LE MAGAZINE",
-      about: "À propos d'Aura",
-      inout: "In & Out",
-      contact: "Contact",
-      newsletter: "LA LETTRE AURA",
-      newsletterText:
-        "Découvrez notre sélection de culture, de style et d'inspiration.",
-      placeholder: "Votre adresse e-mail",
-      subscribe: "S'INSCRIRE",
-      privacy:
-        "En vous inscrivant, vous acceptez notre politique de confidentialité.",
-      rights: "Tous droits réservés.",
-      policy: "Confidentialité",
-      terms: "Conditions générales",
-    },
-  };
-
+  const { lang } = useLanguage();
   const t = content[lang];
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    // Connect a newsletter service here.
-    console.log("Newsletter email:", email);
-    setEmail("");
-  };
-
   return (
-    <footer className="bg-black text-white">
-      {/* Top border */}
-      <div className="h-px bg-white/20" />
+    <footer className="bg-ink text-ivory/75">
+      <div className="mx-auto max-w-[1440px] px-5 pt-16 sm:px-8 lg:px-12 lg:pt-20">
+        {/* Brand */}
+        <div className="flex flex-col items-center border-b border-ivory/15 pb-14 text-center">
+          <Link to="/" aria-label="Aura Magazine home" className="text-ivory">
+            <Logo size="lg" />
+          </Link>
 
-      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 lg:px-12 lg:py-16">
-        {/* Brand Logo */}
-        <div className="flex flex-col items-center border-b border-white/15 pb-12 text-center">
-          <a
-            href="#"
-            aria-label="Aura Magazine home"
-            className="group flex flex-col items-center"
-          >
-            {/* Triangle SVG logo */}
-            <div className="mb-2 flex items-center justify-center">
-              <svg
-                className="h-8 w-8 text-white transition-colors duration-500 group-hover:text-neutral-400 sm:h-10 sm:w-10"
-                viewBox="0 0 100 100"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="6"
-                aria-hidden="true"
-              >
-                <polygon points="50,10 90,85 10,85" />
-                <polygon
-                  points="50,40 70,75 30,75"
-                  fill="currentColor"
-                  opacity="0.15"
-                />
-                <circle cx="50" cy="60" r="4" fill="currentColor" />
-              </svg>
-            </div>
-
-            {/* AURA wordmark */}
-            <span className="pl-[0.35em] font-serif text-4xl font-light uppercase tracking-[0.35em] text-white sm:text-5xl">
-              AURA
-            </span>
-
-            <span className="mt-2 text-[10px] uppercase tracking-[0.4em] text-neutral-400">
-              MAGAZINE
-            </span>
-
-            <span className="mt-1.5 text-[9px] uppercase tracking-[0.3em] text-neutral-400">
-              X KHIM ASRIEL
-            </span>
-          </a>
-
-          <p className="mt-6 font-serif text-xl italic text-neutral-300 sm:text-2xl">
+          <p className="mt-8 font-serif text-2xl italic text-ivory/80 sm:text-3xl">
             {t.tagline}
           </p>
         </div>
 
-        {/* Footer columns */}
-        <div className="grid grid-cols-1 gap-10 border-b border-white/15 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-          {/* Brand description */}
-          <div>
-            <h3 className="text-[10px] font-medium uppercase tracking-[0.25em] text-white">
-              AURA MAGAZINE
-            </h3>
+        {/* Columns */}
+        <div className="grid grid-cols-1 gap-12 border-b border-ivory/15 py-14 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-3">
+            <h2 className={columnTitle}>Aura Magazine</h2>
 
-            <p className="mt-5 max-w-xs text-sm leading-7 text-neutral-300">
+            <p className="mt-6 max-w-xs font-sans text-sm leading-7 text-ivory/65">
               {t.description}
             </p>
 
-            <p className="mt-5 text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+            <p className="mt-6 font-sans text-[10px] tracking-[0.25em] text-ivory/45 uppercase">
               Paris · Fashion · Culture
             </p>
           </div>
 
-          {/* Categories */}
-          <div>
-            <h3 className="text-[10px] font-medium uppercase tracking-[0.25em] text-white">
-              {t.explore}
-            </h3>
+          <div className="lg:col-span-2 lg:col-start-5">
+            <h2 className={columnTitle}>{t.explore}</h2>
 
-            <ul className="mt-5 space-y-4">
-              {t.categories.map((item, index) => (
-                <li key={item}>
-                  <a
-                    href={`#${["fashion", "beauty", "decor", "food"][index]}`}
-                    className="font-serif text-lg text-neutral-200 transition-colors duration-300 hover:text-neutral-400"
+            <ul className="mt-6 space-y-4">
+              {categories.map((item) => (
+                <li key={item.key}>
+                  <Link
+                    to={item.to}
+                    className={`font-serif text-2xl leading-none text-ivory/90 ${footerLink}`}
                   >
-                    {item}
-                  </a>
+                    {item.label[lang]}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Magazine links */}
-          <div>
-            <h3 className="text-[10px] font-medium uppercase tracking-[0.25em] text-white">
-              {t.magazine}
-            </h3>
+          <div className="lg:col-span-2">
+            <h2 className={columnTitle}>{t.magazine}</h2>
 
-            <ul className="mt-5 space-y-4 text-sm text-neutral-300">
+            <ul className="mt-6 space-y-4 font-sans text-sm">
               <li>
-                <a
-                  href="#about"
-                  className="transition hover:text-white"
-                >
+                <Link to="/about" className={footerLink}>
                   {t.about}
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="#in-out"
-                  className="transition hover:text-white"
-                >
+                <Link to="/#in-out" className={footerLink}>
                   {t.inout}
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="mailto:contact@auramagazine.com"
-                  className="transition hover:text-white"
-                >
+                <a href="mailto:contact@auramagazine.com" className={footerLink}>
                   {t.contact}
                 </a>
               </li>
             </ul>
 
-            <div className="mt-7">
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-[10px] uppercase tracking-[0.2em] text-neutral-300 transition-colors hover:text-white"
-              >
-                Instagram ↗
-              </a>
-            </div>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-8 inline-block font-sans text-[10px] tracking-[0.22em] text-ivory/80 uppercase transition-colors duration-300 hover:text-ivory"
+            >
+              Instagram ↗
+            </a>
           </div>
 
-          {/* Newsletter */}
-          <div id="subscribe">
-            <h3 className="font-serif text-2xl text-white">
+          <div className="lg:col-span-3">
+            <h2 className="font-serif text-3xl leading-none text-ivory">
               {t.newsletter}
-            </h3>
+            </h2>
 
-            <p className="mt-4 text-sm leading-6 text-neutral-300">
+            <p className="mt-5 font-sans text-sm leading-6 text-ivory/65">
               {t.newsletterText}
             </p>
 
-            <form onSubmit={handleSubscribe} className="mt-6">
-              <label htmlFor="footer-email" className="sr-only">
-                {t.placeholder}
-              </label>
-
-              <div className="flex border-b border-white/70">
-                <input
-                  id="footer-email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t.placeholder}
-                  className="min-w-0 flex-1 bg-transparent py-3 text-sm text-white outline-none placeholder:text-neutral-500"
-                />
-
-                <button
-                  type="submit"
-                  className="ml-2 shrink-0 text-[9px] font-medium uppercase tracking-[0.15em] text-white transition-colors hover:text-neutral-400 sm:text-[10px]"
-                >
-                  {t.subscribe} ↗
-                </button>
-              </div>
-
-              <p className="mt-3 text-[10px] leading-5 text-neutral-400">
-                {t.privacy}
-              </p>
-            </form>
+            <NewsletterForm
+              id="footer-email"
+              className="mt-7"
+              labels={{
+                placeholder: t.placeholder,
+                subscribe: t.subscribe,
+                privacy: t.privacy,
+                success: t.success,
+              }}
+            />
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-5 pt-6 text-center sm:flex-row sm:text-left">
-          <p className="text-[9px] uppercase tracking-[0.12em] text-neutral-400">
-            © {new Date().getFullYear()} AURA MAGAZINE X KHIM ASRIEL.{" "}
-            {t.rights}
+        <div className="flex flex-col items-center justify-between gap-6 py-8 text-center sm:flex-row sm:text-left">
+          <p className="font-sans text-[10px] tracking-[0.14em] text-ivory/45 uppercase">
+            © {currentYear} Aura Magazine x Khim Asriel. {t.rights}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-5 text-[10px] text-neutral-400">
-            <a
-              href="#privacy"
-              className="transition hover:text-white"
-            >
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 font-sans text-[11px] text-ivory/55">
+            <Link to="/privacy" className={footerLink}>
               {t.policy}
-            </a>
+            </Link>
 
-            <a
-              href="#terms"
-              className="transition hover:text-white"
-            >
+            <Link to="/terms" className={footerLink}>
               {t.terms}
-            </a>
+            </Link>
 
-            <span className="h-3 w-px bg-white/25" />
-
-            <div className="flex items-center gap-2 tracking-widest">
-              <button
-                type="button"
-                onClick={() => setLang("FR")}
-                aria-pressed={lang === "FR"}
-                className={
-                  lang === "FR"
-                    ? "font-bold text-white"
-                    : "transition hover:text-white"
-                }
-              >
-                FR
-              </button>
-
-              <span>/</span>
-
-              <button
-                type="button"
-                onClick={() => setLang("EN")}
-                aria-pressed={lang === "EN"}
-                className={
-                  lang === "EN"
-                    ? "font-bold text-white"
-                    : "transition hover:text-white"
-                }
-              >
-                EN
-              </button>
-            </div>
+            <LanguageSwitch className="flex" inverted />
           </div>
         </div>
       </div>
 
-      {/* Large editorial signature */}
-      <div className="overflow-hidden border-t border-white/15 py-4 text-center">
-        <p className="whitespace-nowrap font-serif text-[clamp(2.5rem,9vw,7.5rem)] leading-none tracking-[-0.06em] text-white/[0.12]">
+      {/* Editorial signature */}
+      <div className="overflow-hidden border-t border-ivory/15 py-2 text-center">
+        <p
+          aria-hidden="true"
+          className="font-serif text-[clamp(2.75rem,10vw,9rem)] leading-none tracking-[-0.04em] whitespace-nowrap text-ivory/[0.07]"
+        >
           AURA MAGAZINE
         </p>
       </div>

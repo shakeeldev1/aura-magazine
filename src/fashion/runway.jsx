@@ -1,6 +1,4 @@
-
-import React from "react";
-
+import FashionStoryPage from "./FashionStoryPage";
 
 const runwayStories = [
   {
@@ -86,7 +84,7 @@ const runwayStories = [
   {
     title: "Soft Tones, Modern Shapes",
     category: "DESIGNERS",
-    image: "https://images.unsplash.com/photo-1551048632-24e444b48e90?auto=format&fit=crop&w=900&q=85",
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=85",
   },
   {
     title: "Effortless Sophistication",
@@ -106,97 +104,19 @@ const runwayStories = [
 ];
 
 
-const Runway = () => {
-  return (
-    <main className="min-h-screen bg-white text-black">
-      {/* RUNWAY HEADING */}
-      <section className="px-4 pb-10 pt-12 sm:px-8 sm:pt-16 lg:px-12">
-        <div className="mx-auto max-w-[1440px] text-center">
-          <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.4em] text-gray-500 sm:text-xs">
-            The World of Fashion
-          </p>
 
-          <h1 className="font-serif text-6xl font-bold uppercase tracking-tight sm:text-8xl lg:text-[110px]">
-            Runway
-          </h1>
-
-          {/* CIRCLE DESIGN */}
-          <div className="mx-auto mt-6 flex h-16 w-16 items-center justify-center rounded-full border border-black sm:mt-8 sm:h-20 sm:w-20">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-black sm:h-12 sm:w-12">
-              <span className="font-serif text-xl italic sm:text-2xl">
-                R
-              </span>
-            </div>
-          </div>
-
-          <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-gray-600 sm:text-base">
-            Discover the collections, creative visions and defining moments
-            shaping fashion on the world's most influential runways.
-          </p>
-
-          <div className="mx-auto mt-8 h-px w-20 bg-black" />
-        </div>
-      </section>
-
-      {/* RUNWAY STORIES */}
-      <section className="px-4 pb-16 pt-4 sm:px-8 sm:pb-20 lg:px-12">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="mb-8 flex items-center justify-between border-b border-black pb-4">
-            <h2 className="font-serif text-2xl sm:text-3xl">
-              The Runway Edit
-            </h2>
-
-            <p className="text-[9px] uppercase tracking-[0.2em] text-gray-500 sm:text-xs">
-              Fashion / 01–20
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-14 md:grid-cols-3 lg:grid-cols-4">
-            {runwayStories.map((story, index) => (
-              <article key={`${story.category}-${index}`} className="group min-w-0">
-                <div className="aspect-[3/4] overflow-hidden bg-gray-100">
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    loading={index < 4 ? "eager" : "lazy"}
-                    className="h-full w-full object-cover grayscale transition duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="pt-3 sm:pt-4">
-                  <p className="mb-2 text-[9px] font-medium uppercase tracking-[0.15em] text-gray-500 sm:text-[10px] sm:tracking-[0.2em]">
-                    {story.category}
-                  </p>
-
-                  <h3 className="font-serif text-base font-semibold leading-snug sm:text-xl lg:text-2xl">
-                    {story.title}
-                  </h3>
-
-                  <div className="mt-3 h-px w-8 bg-black transition-all duration-300 group-hover:w-14" />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CLOSING EDITORIAL */}
-      <section className="border-t border-black px-4 py-16 text-center sm:px-8 sm:py-24">
-        <p className="mb-5 text-[10px] uppercase tracking-[0.35em] text-gray-500">
-          Beyond the Catwalk
-        </p>
-
-        <h2 className="font-serif text-4xl font-medium leading-tight sm:text-6xl lg:text-7xl">
-          Fashion moves forward.
-          <span className="mt-2 block italic">
-            The runway sets the mood.
-          </span>
-        </h2>
-
-        <div className="mx-auto mt-8 h-px w-16 bg-black" />
-      </section>
-    </main>
-  );
-};
+const Runway = () => (
+  <FashionStoryPage
+    eyebrow="The World of Fashion"
+    title="Runway"
+    description="Discover the collections, creative visions and defining moments shaping fashion on the world's most influential runways."
+    stories={runwayStories}
+    closing={{
+      eyebrow: "Beyond the Catwalk",
+      title: "Fashion moves forward.",
+      italic: "The runway sets the mood.",
+    }}
+  />
+);
 
 export default Runway;

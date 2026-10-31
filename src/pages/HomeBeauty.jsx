@@ -1,5 +1,4 @@
-
-import React from "react";
+import { StoryImage } from "../common/ui";
 
 const beautyStories = [
   {
@@ -33,60 +32,51 @@ const beautyStories = [
 
 const HomeBeauty = () => {
   return (
-    <section id="beauty" className="bg-white px-5 py-16 text-black sm:px-8 lg:px-12 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col justify-between gap-5 border-b border-black/20 pb-6 sm:flex-row sm:items-end">
+    <section id="beauty" className="bg-ivory py-20 md:py-28">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-col justify-between gap-6 border-b border-ink/15 pb-8 md:flex-row md:items-end">
           <div>
-            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.35em] text-neutral-500">
-              THE ART OF SELF-CARE
-            </p>
+            <p className="eyebrow text-stone">The art of self-care</p>
 
-            <h2 className="font-serif text-5xl font-normal tracking-tight sm:text-6xl lg:text-7xl">
-              Beauty<span className="italic text-neutral-400"> Edit.</span>
+            <h2 className="mt-5 font-serif text-5xl leading-none sm:text-6xl lg:text-7xl">
+              Beauty <em className="italic text-stone">Edit.</em>
             </h2>
           </div>
 
-          <p className="max-w-xs text-sm leading-6 text-neutral-600">
+          <p className="max-w-xs font-sans text-sm leading-7 text-stone">
             A curated world of beauty, skincare and the little rituals that
             make you feel extraordinary.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-14 grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {beautyStories.map((story) => (
             <article key={story.number} className="group">
-              <a href="#beauty" className="block">
-                <div className="relative overflow-hidden bg-neutral-100">
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    loading="lazy"
-                    className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
+              <div className="relative aspect-[4/5] overflow-hidden bg-linen">
+                <StoryImage
+                  src={story.image}
+                  alt={story.title}
+                  className="h-full w-full object-cover img-tone"
+                />
 
-                  <span className="absolute left-4 top-4 bg-white px-3 py-2 text-[10px] tracking-widest text-black">
-                    {story.number}
-                  </span>
-                </div>
+                <span className="absolute top-4 left-4 bg-ivory px-3 py-1.5 font-serif text-base italic">
+                  {story.number}
+                </span>
+              </div>
 
-                <div className="pt-5">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-neutral-500">
-                    {story.category}
-                  </p>
+              <div className="pt-6">
+                <p className="font-sans text-[10px] font-medium tracking-[0.25em] text-stone uppercase">
+                  {story.category}
+                </p>
 
-                  <h3 className="mt-3 font-serif text-2xl transition-colors duration-300 group-hover:text-neutral-500 sm:text-3xl">
-                    {story.title}
-                  </h3>
+                <h3 className="mt-3 font-serif text-2xl leading-tight transition-colors duration-300 group-hover:text-oxblood sm:text-3xl">
+                  {story.title}
+                </h3>
 
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-neutral-600">
-                    {story.description}
-                  </p>
-
-                  <span className="mt-5 inline-block border-b border-black pb-1 text-[10px] uppercase tracking-[0.2em]">
-                    Discover story ↗
-                  </span>
-                </div>
-              </a>
+                <p className="mt-4 max-w-sm font-sans text-sm leading-7 text-stone">
+                  {story.description}
+                </p>
+              </div>
             </article>
           ))}
         </div>

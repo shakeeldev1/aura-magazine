@@ -1,5 +1,4 @@
-
-import React from "react";
+import { StoryImage } from "../common/ui";
 
 const latestStories = [
   {
@@ -42,50 +41,43 @@ const latestStories = [
 
 const HomeLatestGrid = () => {
   return (
-    <section className="w-full bg-white px-4 py-16 text-black sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-[1400px]">
-        {/* Section Heading */}
-        <div className="mb-10 flex items-end justify-between border-b-2 border-black pb-5">
+    <section id="latest" className="bg-ivory py-20 md:py-28">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        {/* Heading */}
+        <div className="flex flex-col gap-5 border-b border-ink pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-2 text-xs uppercase tracking-[0.3em] text-gray-500">
-              Fashion Around the World
-            </p>
+            <p className="eyebrow text-stone">Fashion Around the World</p>
 
-            <h2 className="font-serif text-4xl font-bold uppercase tracking-tight sm:text-5xl lg:text-6xl">
+            <h2 className="mt-5 font-serif text-6xl leading-none sm:text-7xl lg:text-8xl">
               The Latest
             </h2>
           </div>
 
-          <span className="hidden text-xs uppercase tracking-[0.2em] sm:block">
-            Global Style Edition
-          </span>
+          <p className="eyebrow text-stone">Global Style Edition</p>
         </div>
 
-        {/* Stories Grid */}
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Grid */}
+        <div className="mt-14 grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {latestStories.map((story) => (
-            <article key={story.category} className="group cursor-pointer">
-              {/* Story Image */}
-              <div className="aspect-[4/5] w-full overflow-hidden bg-gray-100">
-                <img
+            <article key={story.category} className="group">
+              <div className="aspect-[4/5] overflow-hidden bg-linen">
+                <StoryImage
                   src={story.image}
                   alt={story.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover img-tone"
                 />
               </div>
 
-              {/* Story Details */}
-              <div className="pt-4">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-gray-500">
+              <div className="pt-6">
+                <p className="font-sans text-[10px] font-medium tracking-[0.25em] text-stone uppercase">
                   {story.category}
                 </p>
 
-                <h3 className="font-serif text-xl font-semibold leading-snug transition-colors duration-300 group-hover:text-gray-500 sm:text-2xl">
+                <h3 className="mt-3 font-serif text-2xl leading-snug transition-colors duration-300 group-hover:text-oxblood sm:text-[1.7rem]">
                   {story.title}
                 </h3>
 
-                <div className="mt-4 h-px w-12 bg-black transition-all duration-300 group-hover:w-20" />
+                <div className="mt-5 h-px w-12 bg-ink transition-all duration-500 group-hover:w-20" />
               </div>
             </article>
           ))}

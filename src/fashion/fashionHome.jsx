@@ -1,6 +1,4 @@
-
-import React from "react";
-import { Link } from "react-router-dom";
+import FashionStoryPage from "./FashionStoryPage";
 
 const fashionStories = [
   {
@@ -79,7 +77,7 @@ const fashionStories = [
     category: "NEW CLASSICS",
     title: "Reimagining the Modern Classic",
     image:
-      "https://images.unsplash.com/photo-1551048632-24e444b48e90?auto=format&fit=crop&w=800&q=85",
+      "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=85",
   },
   {
     category: "EDITORIAL",
@@ -125,106 +123,17 @@ const fashionStories = [
   },
 ];
 
-const FashionHome = () => {
-  return (
-    <main className="min-h-screen bg-white text-black">
-      {/* FASHION HEADING */}
-      <section className="px-4 pb-8 pt-10 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-[1440px]">
-          <h1 className="text-center font-serif text-6xl font-bold uppercase tracking-tight sm:text-8xl lg:text-[110px]">
-            Fashion
-          </h1>
 
-          {/* FOUR PAGE LINKS */}
-          <nav className="mt-8 border-y border-black py-4">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-[10px] font-semibold uppercase tracking-[0.2em] sm:gap-x-16 sm:text-xs">
-              <Link
-                to="/fashion/runway"
-                className="transition-colors hover:text-gray-500"
-              >
-                Runway
-              </Link>
-
-              <Link
-                to="/fashion/street-style"
-                className="transition-colors hover:text-gray-500"
-              >
-                Street Style
-              </Link>
-
-              <Link
-                to="/fashion/trends"
-                className="transition-colors hover:text-gray-500"
-              >
-                Trends
-              </Link>
-
-              <Link
-                to="/fashion/editors-picks"
-                className="transition-colors hover:text-gray-500"
-              >
-                Editor's Picks
-              </Link>
-            </div>
-          </nav>
-        </div>
-      </section>
-
-      {/* 20 FASHION CARDS */}
-      <section
-        id="runway"
-        className="px-4 pb-16 pt-5 sm:px-8 lg:px-12"
-      >
-        <div className="mx-auto max-w-[1440px]">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-14 md:grid-cols-3 lg:grid-cols-4">
-            {fashionStories.map((story) => (
-              <article
-                key={story.title}
-                className="group min-w-0"
-              >
-                <div className="aspect-[3/4] overflow-hidden bg-gray-100">
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover grayscale transition duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="pt-3 sm:pt-4">
-                  <p className="mb-2 text-[9px] font-medium uppercase tracking-[0.18em] text-gray-500 sm:text-[10px] sm:tracking-[0.22em]">
-                    {story.category}
-                  </p>
-
-                  <h2 className="font-serif text-lg font-semibold leading-snug sm:text-xl lg:text-2xl">
-                    {story.title}
-                  </h2>
-
-                  <div className="mt-3 h-px w-8 bg-black transition-all duration-300 group-hover:w-14" />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CLOSING EDITORIAL */}
-      <section className="border-t border-black px-4 py-16 text-center sm:px-8 sm:py-24">
-        <p className="mb-5 text-[10px] uppercase tracking-[0.35em] text-gray-500">
-          A point of view
-        </p>
-
-        <h2 className="font-serif text-4xl font-medium leading-tight sm:text-6xl lg:text-7xl">
-          Style is personal.
-          <span className="mt-2 block italic">
-            Fashion is a statement.
-          </span>
-        </h2>
-
-        <div className="mx-auto mt-8 h-px w-16 bg-black" />
-      </section>
-    </main>
-  );
-};
+const FashionHome = () => (
+  <FashionStoryPage
+    title="Fashion"
+    stories={fashionStories}
+    closing={{
+      eyebrow: "A point of view",
+      title: "Style is personal.",
+      italic: "Fashion is a statement.",
+    }}
+  />
+);
 
 export default FashionHome;

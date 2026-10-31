@@ -1,1 +1,92 @@
 @import "tailwindcss";
+
+/*
+  Design tokens. Ivory and ink carry the layout; oxblood is the single accent.
+  Keep new colors out of components: add them here first.
+*/
+@theme {
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", "Times New Roman", serif;
+  --font-sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+
+  --color-ink: #17130f;
+  --color-ivory: #f8f5f0;
+  --color-linen: #efe9e0;
+  --color-stone: #6e665e;
+  --color-oxblood: #702632;
+  --color-oxblood-deep: #521b25;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 1.1s var(--ease-luxe) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    background: var(--color-oxblood);
+    color: var(--color-ivory);
+  }
+
+  /* Anchored sections clear the sticky header. */
+  [id] {
+    scroll-margin-top: 7rem;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-oxblood);
+    outline-offset: 4px;
+  }
+}
+
+/* Small uppercase label used above headings. Set its colour where it is used. */
+@utility eyebrow {
+  @apply font-sans text-[10px] font-medium uppercase tracking-[0.34em];
+}
+
+/* Solid call to action. */
+@utility btn-solid {
+  @apply inline-flex items-center justify-center gap-3 bg-ink px-7 py-4 font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-ivory transition-colors duration-500 ease-luxe hover:bg-oxblood;
+}
+
+/* Outlined secondary action. */
+@utility btn-line {
+  @apply inline-flex items-center justify-center gap-3 border border-ink px-7 py-4 font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-ink transition-colors duration-500 ease-luxe hover:bg-ink hover:text-ivory;
+}
+
+/* Text link with a fine underline. */
+@utility link-line {
+  @apply inline-flex items-center gap-2 border-b border-current pb-1 font-sans text-[11px] font-medium uppercase tracking-[0.2em] transition-colors duration-300 hover:text-oxblood;
+}
+
+/* Editorial image treatment: slightly desaturated, full colour on hover. */
+@utility img-tone {
+  @apply grayscale-[0.25] transition duration-[900ms] ease-luxe group-hover:scale-[1.03] group-hover:grayscale-0;
+}
+
+/* Remove dashed scrollbars on horizontal rails without hiding scrolling. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

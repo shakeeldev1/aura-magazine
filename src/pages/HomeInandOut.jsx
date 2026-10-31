@@ -1,5 +1,4 @@
-
-import React from "react";
+import { StoryImage } from "../common/ui";
 
 const stories = [
   {
@@ -22,44 +21,43 @@ const stories = [
 
 const HomeInandOut = () => {
   return (
-    <section className="bg-black px-4 py-16 text-white sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-[1400px]">
-        <div className="mb-10 border-b border-white/40 pb-5">
-          <p className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-400">
-            The Style Report
-          </p>
+    <section id="in-out" className="bg-ink py-20 text-ivory md:py-28">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-14 flex flex-col gap-5 border-b border-ivory/15 pb-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="eyebrow text-ivory/55">The Style Report</p>
 
-          <h2 className="font-serif text-4xl font-bold uppercase tracking-tight sm:text-6xl">
-            In & Out
-          </h2>
+            <h2 className="mt-5 font-serif text-6xl leading-none sm:text-7xl lg:text-8xl">
+              In <em className="italic text-ivory/60">&amp;</em> Out
+            </h2>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+        <div className="grid gap-14 md:grid-cols-2 md:gap-10">
           {stories.map((story) => (
             <article key={story.category} className="group">
-              <div className="aspect-[5/4] overflow-hidden bg-neutral-900">
-                <img
+              <div className="aspect-[5/4] overflow-hidden bg-ivory/10">
+                <StoryImage
                   src={story.image}
                   alt={story.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover img-tone"
                 />
               </div>
 
-              <div className="pt-5">
-                <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-gray-400">
+              <div className="pt-7">
+                <p className="font-sans text-[10px] font-medium tracking-[0.25em] text-ivory/55 uppercase">
                   {story.category}
                 </p>
 
-                <h3 className="max-w-xl font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+                <h3 className="mt-4 max-w-xl font-serif text-3xl leading-tight sm:text-4xl">
                   {story.title}
                 </h3>
 
-                <p className="mt-3 max-w-lg text-sm leading-7 text-gray-400">
+                <p className="mt-4 max-w-lg font-sans text-sm leading-7 text-ivory/60">
                   {story.description}
                 </p>
 
-                <div className="mt-5 h-px w-12 bg-white transition-all duration-300 group-hover:w-24" />
+                <div className="mt-6 h-px w-12 bg-ivory transition-all duration-500 group-hover:w-24" />
               </div>
             </article>
           ))}

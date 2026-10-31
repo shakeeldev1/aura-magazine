@@ -1,256 +1,209 @@
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { useLanguage } from "./language";
+import { categories } from "./navigation";
+import { LanguageSwitch, Logo } from "./ui";
 
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+const copy = {
+  EN: {
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    subscribe: "Subscribe",
+    menuSubscribe: "Subscribe to the magazine",
+    menuLabel: "Site menu",
+  },
+  FR: {
+    openMenu: "Ouvrir le menu",
+    closeMenu: "Fermer le menu",
+    subscribe: "S'abonner",
+    menuSubscribe: "S'abonner au magazine",
+    menuLabel: "Menu du site",
+  },
+};
 
-const Navbar = () => {
-  const [lang, setLang] = useState("EN");
-  const [activeTab, setActiveTab] = useState("Fashion");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const CategoryLink = ({ item, label }) => {
+  const isAnchor = item.to.includes("#");
+  const className =
+    "group relative py-2 font-sans text-[12px] font-normal tracking-[0.24em] uppercase transition-colors duration-300";
 
-  const navigate = useNavigate();
+  const underline = (active) => (
+    <span
+      aria-hidden="true"
+      className={`absolute inset-x-0 -bottom-px h-px origin-left bg-ink transition-transform duration-500 ease-luxe ${
+        active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+      }`}
+    />
+  );
 
-  const navigation = {
-    EN: [
-      { name: "Fashion", href: "/fashion" },
-      { name: "Beauty", href: "#beauty" },
-      { name: "Decor", href: "#decor" },
-      { name: "Food", href: "#food" },
-    ],
-    FR: [
-      { name: "Mode", href: "/fashion" },
-      { name: "Beauté", href: "#beauty" },
-      { name: "Décor", href: "#decor" },
-      { name: "Gastronomie", href: "#food" },
-    ],
-  };
-
-  const activeNav = navigation[lang];
-
-  const handleNavigation = (item, index) => {
-    setActiveTab(navigation.EN[index].name);
-    setIsMobileMenuOpen(false);
-
-    if (item.href === "/fashion") {
-      navigate("/fashion");
-    } else {
-      navigate("/");
-      setTimeout(() => {
-        const section = document.querySelector(item.href);
-
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    }
-  };
+  // Hash links point at a section on the home page, so they never show as active.
+  if (isAnchor) {
+    return (
+      <Link to={item.to} className={`${className} text-stone hover:text-ink`}>
+        {label}
+        {underline(false)}
+      </Link>
+    );
+  }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/15 bg-white/95 text-black backdrop-blur-md transition-colors duration-300">
+    <NavLink
+      to={item.to}
+      className={({ isActive }) =>
+        `${className} ${isActive ? "text-ink" : "text-stone hover:text-ink"}`
+      }
+    >
+      {({ isActive }) => (
+        <>
+          {label}
+          {underline(isActive)}
+        </>
+      )}
+    </NavLink>
+  );
+};
 
-      {/* Announcement Ribbon */}
-      <div className="bg-black px-4 py-1.5 text-center text-[10px] font-light uppercase tracking-[0.3em] text-white">
-        <span>AURA x KHIM ASRIEL</span>
-        <span className="mx-3 opacity-40">|</span>
-        <span className="text-white/75">
-          Issue N° 01 — Autumn / Winter 2026
-        </span>
+const MobileMenu = ({ onClose, lang, t }) => (
+  <div
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label={t.menuLabel}
+    className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-ivory md:hidden"
+  >
+    <div className="grid h-20 shrink-0 grid-cols-[1fr_auto_1fr] items-center px-5">
+      <div className="flex items-center">
+        <LanguageSwitch className="flex" />
       </div>
 
-      {/* Main Header */}
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24 lg:px-12">
+      <Link to="/" onClick={onClose} aria-label="Aura Magazine home">
+        <Logo />
+      </Link>
 
-        {/* Language Switcher */}
-        <div className="hidden items-center space-x-2 font-serif text-xs tracking-widest text-neutral-600 md:flex">
-          <button
-            onClick={() => setLang("FR")}
-            className={`border-b px-2 py-1 transition-all duration-300 ${
-              lang === "FR"
-                ? "border-black font-semibold text-black"
-                : "border-transparent opacity-60 hover:text-black"
-            }`}
-          >
-            FR
-          </button>
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={t.closeMenu}
+          className="-mr-2 p-2"
+        >
+          <X className="h-5 w-5" strokeWidth={1.25} />
+        </button>
+      </div>
+    </div>
 
-          <span className="opacity-30">/</span>
+    <nav aria-label="Categories" className="flex flex-1 flex-col justify-center px-6">
+      <ul>
+        {categories.map((item) => (
+          <li key={item.key}>
+            <Link
+              to={item.to}
+              onClick={onClose}
+              className="block border-b border-ink/10 py-5 font-serif text-4xl leading-none transition-colors hover:text-oxblood"
+            >
+              {item.label[lang]}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
 
-          <button
-            onClick={() => setLang("EN")}
-            className={`border-b px-2 py-1 transition-all duration-300 ${
-              lang === "EN"
-                ? "border-black font-semibold text-black"
-                : "border-transparent opacity-60 hover:text-black"
-            }`}
-          >
-            EN
-          </button>
+    <div className="px-6 pt-10 pb-10">
+      <Link
+        to="/#subscribe"
+        onClick={onClose}
+        className="btn-solid w-full"
+      >
+        {t.menuSubscribe}
+      </Link>
+    </div>
+  </div>
+);
+
+const Navbar = () => {
+  const { lang } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const t = copy[lang];
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  return (
+    <>
+      <header className="sticky top-0 z-50 border-b border-ink/10 bg-ivory/95 text-ink backdrop-blur-md">
+        {/* Announcement strip */}
+        <div className="bg-ink px-4 py-2 text-center font-sans text-[10px] tracking-[0.3em] text-ivory/85 uppercase">
+          <span>Aura x Khim Asriel</span>
+          <span aria-hidden="true" className="mx-3 hidden text-ivory/35 sm:inline">
+            |
+          </span>
+          <span className="hidden text-ivory/60 sm:inline">
+            Issue N° 01 — Autumn / Winter 2026
+          </span>
         </div>
 
-        {/* Center Logo */}
-        <div className="group flex cursor-pointer flex-col items-center">
-          <Link to="/" className="flex flex-col items-center">
-            <div className="mb-1 flex items-center space-x-3">
-              <svg
-                className="h-6 w-6 text-black transition-colors duration-500 group-hover:text-neutral-500 md:h-8 md:w-8"
-                viewBox="0 0 100 100"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="6"
-              >
-                <polygon points="50,10 90,85 10,85" />
-                <polygon
-                  points="50,40 70,75 30,75"
-                  fill="currentColor"
-                  opacity="0.15"
-                />
-                <circle cx="50" cy="60" r="4" fill="currentColor" />
-              </svg>
-            </div>
+        {/* Main row */}
+        <div className="mx-auto grid h-20 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 md:h-24 lg:px-12">
+          <div className="flex items-center">
+            <LanguageSwitch className="hidden md:flex" />
 
-            <h1 className="pl-[0.35em] font-serif text-2xl font-light uppercase tracking-[0.35em] text-black md:text-3xl">
-              AURA
-            </h1>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label={t.openMenu}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              className="-ml-2 p-2 md:hidden"
+            >
+              <Menu className="h-5 w-5" strokeWidth={1.25} />
+            </button>
+          </div>
 
-            <span className="mt-0.5 font-sans text-[9px] uppercase tracking-[0.4em] text-neutral-500 md:text-[10px]">
-              X KHIM ASRIEL
-            </span>
+          <Link to="/" aria-label="Aura Magazine home" className="justify-self-center">
+            <Logo />
           </Link>
-        </div>
 
-        {/* Desktop Actions */}
-        <div className="hidden items-center space-x-6 text-xs uppercase tracking-widest text-black md:flex">
-          <button className="flex items-center space-x-1 transition-colors duration-300 hover:text-neutral-500">
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex items-center justify-end">
+            <LanguageSwitch className="flex md:hidden" />
+
+            <Link
+              to="/#subscribe"
+              className="hidden bg-ink px-5 py-3 font-sans text-[10px] font-medium tracking-[0.22em] text-ivory uppercase transition-colors duration-500 hover:bg-oxblood md:inline-flex"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-
-            <span className="hidden lg:inline">
-              {lang === "FR" ? "Rechercher" : "Search"}
-            </span>
-          </button>
-
-          <a
-            href="#subscribe"
-            className="border border-black bg-black px-4 py-2 text-[11px] tracking-[0.2em] text-white transition-all duration-300 hover:bg-white hover:text-black"
-          >
-            {lang === "FR" ? "S'ABONNER" : "SUBSCRIBE"}
-          </a>
+              {t.subscribe}
+            </Link>
+          </div>
         </div>
 
-        {/* Mobile Actions */}
-        <div className="flex items-center space-x-4 md:hidden">
-          <button
-            onClick={() => setLang(lang === "EN" ? "FR" : "EN")}
-            className="font-serif text-xs font-semibold tracking-widest text-black"
-          >
-            {lang}
-          </button>
-
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-black focus:outline-none"
-            aria-label="Toggle Menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M4 8h16M4 16h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Desktop Navigation */}
-      <nav className="border-t border-black/10 bg-white">
-        <div className="mx-auto flex max-w-7xl justify-center px-6">
-          <ul className="no-scrollbar flex space-x-8 overflow-x-auto py-3 md:space-x-16">
-            {activeNav.map((item, index) => {
-              const isSelected =
-                activeTab === navigation.EN[index].name;
-
-              return (
-                <li key={item.name}>
-                  <button
-                    type="button"
-                    onClick={() => handleNavigation(item, index)}
-                    className={`relative inline-block whitespace-nowrap py-1 text-xs uppercase tracking-[0.25em] transition-all duration-300 md:text-sm ${
-                      isSelected
-                        ? "font-medium text-black"
-                        : "text-neutral-500 hover:text-black"
-                    }`}
-                  >
-                    {item.name}
-
-                    {isSelected && (
-                      <span className="absolute bottom-0 left-0 h-[1.5px] w-full bg-black" />
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </nav>
-
-      {/* Mobile Drawer */}
-      {isMobileMenuOpen && (
-        <div className="animate-fadeIn space-y-6 border-b border-black/15 bg-white px-6 py-8 md:hidden">
-          <ul className="space-y-4 text-center">
-            {activeNav.map((item, index) => (
-              <li key={item.name}>
-                <button
-                  type="button"
-                  onClick={() => handleNavigation(item, index)}
-                  className="block w-full border-b border-black/10 py-2 text-sm uppercase tracking-[0.3em] text-black transition-colors hover:text-neutral-500"
-                >
-                  {item.name}
-                </button>
+        {/* Category navigation (desktop) */}
+        <nav aria-label="Categories" className="hidden border-t border-ink/10 md:block">
+          <ul className="mx-auto flex max-w-[1440px] items-center justify-center gap-14 px-12 lg:gap-20">
+            {categories.map((item) => (
+              <li key={item.key}>
+                <CategoryLink item={item} label={item.label[lang]} />
               </li>
             ))}
           </ul>
+        </nav>
+      </header>
 
-          <div className="flex justify-center pt-4">
-            <a
-              href="#subscribe"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full border border-black bg-black py-3 text-center text-xs uppercase tracking-[0.25em] text-white transition hover:bg-white hover:text-black"
-            >
-              {lang === "FR"
-                ? "S'ABONNER AU MAGAZINE"
-                : "SUBSCRIBE TO MAGAZINE"}
-            </a>
-          </div>
-        </div>
+      {menuOpen && (
+        <MobileMenu onClose={() => setMenuOpen(false)} lang={lang} t={t} />
       )}
-    </header>
+    </>
   );
 };
 

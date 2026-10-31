@@ -1,23 +1,45 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import LanguageProvider from "./common/LanguageProvider";
+import ScrollToTop from "./common/ScrollToTop";
 import Navbar from "./common/navbar";
 import Footer from "./common/footer";
+import { forthcomingPages } from "./common/navigation";
 import Home from "./pages/home";
+import Forthcoming from "./pages/Forthcoming";
+import NotFound from "./pages/NotFound";
 import Fashion from "./fashion/fashion";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
+    <LanguageProvider>
+      <BrowserRouter>
+        <ScrollToTop />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/fashion/*" element={<Fashion />} />
-      </Routes>
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
 
-      <Footer />
-    </BrowserRouter>
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/fashion/*" element={<Fashion />} />
+
+              {Object.entries(forthcomingPages).map(([slug, page]) => (
+                <Route
+                  key={slug}
+                  path={`/${slug}`}
+                  element={<Forthcoming page={page} />}
+                />
+              ))}
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </LanguageProvider>
   );
 }
 

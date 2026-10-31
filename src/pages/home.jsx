@@ -1,5 +1,3 @@
-
-import React from "react";
 import HomeHero from "./HomeHero";
 import HomeBrandSpotlight from "./HomeBrandSpotlight";
 import HomeFashion from "./HomeFashion";
@@ -10,14 +8,14 @@ import HomeNewsLetter from "./HomeNewsLetter";
 
 const Home = () => {
   return (
-    <main className="overflow-hidden  text-[#1C1917]">
+    <main className="overflow-hidden">
       <HomeHero />
       <HomeBrandSpotlight />
       <HomeFashion />
-     <HomeBeauty /> 
+      <HomeBeauty />
       <HomeInandOut />
       <HomeLatestGrid />
-      <HomeNewsLetter /> 
+      <HomeNewsLetter />
     </main>
   );
 };

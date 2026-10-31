@@ -1,6 +1,7 @@
-
-import React, { useEffect, useState } from "react";
-
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { StoryImage } from "../common/ui";
 
 const fashionStories = [
   {
@@ -9,7 +10,6 @@ const fashionStories = [
     title: "The art of standing out",
     image:
       "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=85",
-    blackWhite: true,
   },
   {
     number: "02",
@@ -24,7 +24,6 @@ const fashionStories = [
     title: "A look that says it all",
     image:
       "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=85",
-    blackWhite: true,
   },
   {
     number: "04",
@@ -46,7 +45,6 @@ const fashionStories = [
     title: "Wear your own story",
     image:
       "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=85",
-    blackWhite: true,
   },
   {
     number: "07",
@@ -61,7 +59,6 @@ const fashionStories = [
     title: "Everyday, elevated",
     image:
       "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=85",
-    blackWhite: true,
   },
   {
     number: "09",
@@ -79,126 +76,197 @@ const fashionStories = [
   },
 ];
 
+const AUTOPLAY_DELAY = 5000;
+
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const isAtEnd = (track) =>
+  track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
 
 const HomeFashion = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const repeatedStories = [...fashionStories, ...fashionStories];
+  const scrollToCard = useCallback((index) => {
+    const track = trackRef.current;
+    const card = track?.children[index];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide(
-        (prev) => (prev + 1) % fashionStories.length
-      );
-    }, 3000);
+    if (!card) return;
 
-    return () => clearInterval(interval);
+    track.scrollTo({
+      left: card.offsetLeft,
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
   }, []);
+
+  // Tracks the card nearest the left edge so the dots stay in sync with swiping.
+  const handleScroll = () => {
+    const track = trackRef.current;
+
+    if (!track) return;
+
+    if (isAtEnd(track)) {
+      setActiveIndex(fashionStories.length - 1);
+      return;
+    }
+
+    let nearest = 0;
+    let smallestGap = Infinity;
+
+    Array.from(track.children).forEach((card, index) => {
+      const gap = Math.abs(card.offsetLeft - track.scrollLeft);
+
+      if (gap < smallestGap) {
+        smallestGap = gap;
+        nearest = index;
+      }
+    });
+
+    setActiveIndex(nearest);
+  };
+
+  const showNext = useCallback(() => {
+    const track = trackRef.current;
+
+    if (!track) return;
+
+    if (isAtEnd(track)) {
+      scrollToCard(0);
+    } else {
+      scrollToCard(Math.min(activeIndex + 1, fashionStories.length - 1));
+    }
+  }, [activeIndex, scrollToCard]);
+
+  const showPrevious = () => {
+    scrollToCard(Math.max(activeIndex - 1, 0));
+  };
+
+  // Autoplay pauses while hovered or focused, and is off for reduced motion.
+  useEffect(() => {
+    if (paused || prefersReducedMotion()) return undefined;
+
+    const timer = setInterval(showNext, AUTOPLAY_DELAY);
+
+    return () => clearInterval(timer);
+  }, [paused, showNext]);
 
   return (
     <section
       id="fashion"
-      className="overflow-hidden bg-white  px-5 py-16 text-black sm:px-10 sm:py-24 lg:px-16"
+      aria-roledescription="carousel"
+      aria-label="The Fashion Edit"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      className="bg-ivory py-20 md:py-28"
     >
-      <div className="mx-auto max-w-7xl">
-        {/* Section Heading */}
-        <div className="mb-10 flex flex-col justify-between gap-5 sm:mb-14 sm:flex-row sm:items-end">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        {/* Heading */}
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[#702632]">
-              Curated for you
-            </p>
+            <p className="eyebrow text-stone">Curated for you</p>
 
-            <h2 className="font-serif text-4xl leading-tight sm:text-6xl">
-              The Fashion
-              <span className="ml-2 italic text-[#702632]">
-                Edit.
-              </span>
+            <h2 className="mt-5 font-serif text-5xl leading-none sm:text-6xl lg:text-7xl">
+              The Fashion <em className="italic text-oxblood">Edit.</em>
             </h2>
           </div>
 
-          <p className="max-w-sm text-sm leading-6 text-neutral-600">
+          <p className="max-w-sm font-sans text-sm leading-7 text-stone">
             The latest looks, statement pieces, and personal style
             moments worth saving.
           </p>
         </div>
 
-        {/* Automatic Three-Card Slider */}
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{
-              transform: `translateX(-${currentSlide * (100 / 3)}%)`,
-            }}
-          >
-            {repeatedStories.map((story, index) => (
-              <article
-                key={`${story.number}-${index}`}
-                className="w-1/3 flex-none px-2"
-              >
-                {/* Image */}
-                <div className="group relative overflow-hidden bg-neutral-200">
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    loading="lazy"
-                    className={`h-[250px] w-full object-cover transition duration-700 group-hover:scale-105 sm:h-[350px] lg:h-[450px] ${
-                      story.blackWhite ? "grayscale" : ""
-                    }`}
-                  />
-
-                  <span className="absolute left-3 top-3 bg-white px-3 py-2 font-serif text-sm italic text-[#702632] sm:left-4 sm:top-4">
-                    {story.number}
-                  </span>
-
-                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
-                </div>
-
-                {/* Card Content */}
-                <div className="flex items-start justify-between gap-2 border-b border-black/20 py-4 sm:py-5">
-                  <div>
-                    <p className="mb-2 text-[9px] uppercase tracking-[0.15em] text-[#702632] sm:text-[10px] sm:tracking-[0.25em]">
-                      {story.category}
-                    </p>
-
-                    <h3 className="font-serif text-lg transition-colors hover:text-[#702632] sm:text-2xl lg:text-3xl">
-                      {story.title}
-                    </h3>
-                  </div>
-
-                  <span className="mt-1 text-lg transition-transform hover:translate-x-1 hover:-translate-y-1 sm:text-xl">
-                    ↗
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        {/* Slider Indicators */}
-        <div className="mt-7 flex justify-center gap-2">
+        {/* Track */}
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          className="no-scrollbar mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto sm:gap-6 md:mt-16"
+        >
           {fashionStories.map((story, index) => (
-            <button
+            <article
               key={story.number}
-              type="button"
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                currentSlide === index
-                  ? "w-8 bg-[#702632]"
-                  : "w-3 bg-neutral-300"
-              }`}
-            />
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${fashionStories.length}`}
+              className="group w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden bg-linen">
+                <StoryImage
+                  src={story.image}
+                  alt={story.title}
+                  eager={index < 3}
+                  className="h-full w-full object-cover img-tone"
+                />
+
+                <span className="absolute top-4 left-4 bg-ivory px-3 py-1.5 font-serif text-base italic text-oxblood">
+                  {story.number}
+                </span>
+              </div>
+
+              <div className="border-b border-ink/15 py-5">
+                <p className="font-sans text-[10px] font-medium tracking-[0.25em] text-oxblood uppercase">
+                  {story.category}
+                </p>
+
+                <h3 className="mt-3 font-serif text-2xl leading-tight transition-colors duration-300 group-hover:text-oxblood sm:text-3xl">
+                  {story.title}
+                </h3>
+              </div>
+            </article>
           ))}
         </div>
 
-        {/* Bottom Link */}
-        <div className="mt-10 text-center sm:mt-14">
-          <a
-            href="#latest"
-            className="inline-block border-b border-[#702632] pb-2 text-[10px] uppercase tracking-[0.3em] text-[#702632] transition hover:border-black hover:text-black"
-          >
+        {/* Controls */}
+        <div className="mt-10 flex items-center justify-between gap-6">
+          <div className="flex min-w-0 items-center gap-1.5">
+            {fashionStories.map((story, index) => (
+              <button
+                key={story.number}
+                type="button"
+                onClick={() => scrollToCard(index)}
+                aria-label={`Show story ${index + 1}`}
+                aria-current={activeIndex === index}
+                className="group flex h-8 items-center"
+              >
+                <span
+                  className={`block h-[2px] transition-all duration-500 ${
+                    activeIndex === index
+                      ? "w-8 bg-ink"
+                      : "w-3 bg-ink/25 group-hover:bg-ink/60"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={showPrevious}
+              aria-label="Previous stories"
+              className="flex h-10 w-10 items-center justify-center border border-ink/20 transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
+            >
+              <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
+            </button>
+
+            <button
+              type="button"
+              onClick={showNext}
+              aria-label="Next stories"
+              className="flex h-10 w-10 items-center justify-center border border-ink/20 transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
+            >
+              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-14 text-center">
+          <Link to="/fashion" className="link-line">
             Explore all fashion stories
-          </a>
+          </Link>
         </div>
       </div>
     </section>
