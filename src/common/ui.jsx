@@ -24,11 +24,11 @@ export const Logo = ({ size = "sm" }) => {
       <span
         className={
           large
-            ? "pl-[0.35em] font-serif text-5xl leading-none tracking-[0.35em] uppercase sm:text-6xl"
-            : "pl-[0.35em] font-serif text-2xl leading-none tracking-[0.35em] uppercase md:text-3xl"
+            ? "pl-[0.22em] font-serif text-5xl leading-none tracking-[0.22em] uppercase sm:text-6xl"
+            : "pl-[0.22em] font-serif text-2xl leading-none tracking-[0.22em] uppercase md:text-3xl"
         }
       >
-        AURA
+        INSOLITE
       </span>
 
       <span
@@ -38,7 +38,7 @@ export const Logo = ({ size = "sm" }) => {
             : "mt-1.5 text-[8px] tracking-[0.4em] uppercase opacity-70 md:text-[9px]"
         }
       >
-        X Khim Asriel
+        Magazine
       </span>
     </span>
   );
@@ -96,7 +96,7 @@ export const StoryImage = ({ src, alt, eager = false, className = "" }) => {
         aria-label={alt}
         className={`flex items-center justify-center bg-linen ${className}`}
       >
-        <span className="font-serif text-2xl italic text-stone">Aura</span>
+        <span className="font-serif text-2xl italic text-stone">Insolite</span>
       </div>
     );
   }

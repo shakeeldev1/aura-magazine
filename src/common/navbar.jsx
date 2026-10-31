@@ -76,7 +76,7 @@ const MobileMenu = ({ onClose, lang, t }) => (
         <LanguageSwitch className="flex" />
       </div>
 
-      <Link to="/" onClick={onClose} aria-label="Aura Magazine home">
+      <Link to="/" onClick={onClose} aria-label="Insolite Magazine home">
         <Logo />
       </Link>
 
@@ -146,7 +146,7 @@ const Navbar = () => {
       <header className="sticky top-0 z-50 border-b border-ink/10 bg-ivory/95 text-ink backdrop-blur-md">
         {/* Announcement strip */}
         <div className="bg-ink px-4 py-2 text-center font-sans text-[10px] tracking-[0.3em] text-ivory/85 uppercase">
-          <span>Aura x Khim Asriel</span>
+          <span>Insolite x Khim Asriel</span>
           <span aria-hidden="true" className="mx-3 hidden text-ivory/35 sm:inline">
             |
           </span>
@@ -172,7 +172,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <Link to="/" aria-label="Aura Magazine home" className="justify-self-center">
+          <Link to="/" aria-label="Insolite Magazine home" className="justify-self-center">
             <Logo />
           </Link>
 

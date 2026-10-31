@@ -70,9 +70,9 @@ const HomeHero = () => {
 
       {/* Footer line */}
       <div className="mx-auto flex max-w-[1440px] flex-col gap-3 border-t border-ink/15 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
-        <p className="eyebrow text-ink/70">Aura Magazine x Khim Asriel</p>
+        <p className="eyebrow text-ink/70">Insolite Magazine x Khim Asriel</p>
 
-        <p className="eyebrow text-ink/70">Be bold &nbsp;/&nbsp; Be you &nbsp;/&nbsp; Be Aura</p>
+        <p className="eyebrow text-ink/70">Be bold &nbsp;/&nbsp; Be you &nbsp;/&nbsp; Be Insolite</p>
       </div>
     </section>
   );

@@ -22,7 +22,7 @@ const HomeBrandSpotlight = () => {
 
         {/* Content */}
         <div className="max-w-xl md:pl-4">
-          <p className="eyebrow text-stone">The Aura Spotlight</p>
+          <p className="eyebrow text-stone">The Insolite Spotlight</p>
 
           <h2 className="mt-6 font-serif text-5xl leading-[0.98] sm:text-6xl lg:text-7xl">
             Style is
@@ -39,7 +39,7 @@ const HomeBrandSpotlight = () => {
 
           <p className="mt-5 font-sans text-base leading-8 text-stone">
             Discover a world of expressive looks, timeless elegance,
-            and unexpected inspiration with Aura Magazine.
+            and unexpected inspiration with Insolite Magazine.
           </p>
 
           <a href="#fashion" className="link-line mt-10">

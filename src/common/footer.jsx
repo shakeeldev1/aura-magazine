@@ -13,10 +13,10 @@ const content = {
       "An editorial universe exploring fashion, beauty, interiors and gastronomy through a distinctive lens.",
     explore: "Explore",
     magazine: "The Magazine",
-    about: "About Aura",
+    about: "About Insolite",
     inout: "In & Out",
     contact: "Contact",
-    newsletter: "The Aura Letter",
+    newsletter: "The Insolite Letter",
     newsletterText:
       "Discover our selection of culture, style and inspiration.",
     placeholder: "Your email address",
@@ -33,10 +33,10 @@ const content = {
       "Un univers éditorial dédié à la mode, la beauté, la décoration et la gastronomie.",
     explore: "Explorer",
     magazine: "Le magazine",
-    about: "À propos d'Aura",
+    about: "À propos d'Insolite",
     inout: "In & Out",
     contact: "Contact",
-    newsletter: "La lettre Aura",
+    newsletter: "La lettre Insolite",
     newsletterText:
       "Découvrez notre sélection de culture, de style et d'inspiration.",
     placeholder: "Votre adresse e-mail",
@@ -65,7 +65,7 @@ const Footer = () => {
       <div className="mx-auto max-w-[1440px] px-5 pt-16 sm:px-8 lg:px-12 lg:pt-20">
         {/* Brand */}
         <div className="flex flex-col items-center border-b border-ivory/15 pb-14 text-center">
-          <Link to="/" aria-label="Aura Magazine home" className="text-ivory">
+          <Link to="/" aria-label="Insolite Magazine home" className="text-ivory">
             <Logo size="lg" />
           </Link>
 
@@ -77,7 +77,7 @@ const Footer = () => {
         {/* Columns */}
         <div className="grid grid-cols-1 gap-12 border-b border-ivory/15 py-14 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-3">
-            <h2 className={columnTitle}>Aura Magazine</h2>
+            <h2 className={columnTitle}>Insolite Magazine</h2>
 
             <p className="mt-6 max-w-xs font-sans text-sm leading-7 text-ivory/65">
               {t.description}
@@ -163,7 +163,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-6 py-8 text-center sm:flex-row sm:text-left">
           <p className="font-sans text-[10px] tracking-[0.14em] text-ivory/45 uppercase">
-            © {currentYear} Aura Magazine x Khim Asriel. {t.rights}
+            © {currentYear} Insolite Magazine x Khim Asriel. {t.rights}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 font-sans text-[11px] text-ivory/55">
@@ -184,9 +184,9 @@ const Footer = () => {
       <div className="overflow-hidden border-t border-ivory/15 py-2 text-center">
         <p
           aria-hidden="true"
-          className="font-serif text-[clamp(2.75rem,10vw,9rem)] leading-none tracking-[-0.04em] whitespace-nowrap text-ivory/[0.07]"
+          className="font-serif text-[clamp(2rem,6.5vw,6rem)] leading-none tracking-[-0.04em] whitespace-nowrap text-ivory/[0.07]"
         >
-          AURA MAGAZINE
+          INSOLITE MAGAZINE
         </p>
       </div>
     </footer>

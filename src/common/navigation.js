@@ -10,7 +10,7 @@ export const categories = [
 export const forthcomingPages = {
   decor: { title: { EN: "Decor", FR: "Décor" } },
   food: { title: { EN: "Food", FR: "Gastronomie" } },
-  about: { title: { EN: "About Aura", FR: "À propos d'Aura" } },
+  about: { title: { EN: "About Insolite", FR: "À propos d'Insolite" } },
   privacy: { title: { EN: "Privacy Policy", FR: "Confidentialité" } },
   terms: { title: { EN: "Terms & Conditions", FR: "Conditions générales" } },
 };
