@@ -1,4 +1,20 @@
 import FashionStoryPage from "./FashionStoryPage";
+import { useLanguage } from "../common/language";
+
+const copy = {
+  EN: {
+    title: "Fashion",
+    closingEyebrow: "A point of view",
+    closingTitle: "Style is personal.",
+    closingItalic: "Fashion is a statement.",
+  },
+  FR: {
+    title: "Mode",
+    closingEyebrow: "Un point de vue",
+    closingTitle: "Le style est personnel.",
+    closingItalic: "La mode est une déclaration.",
+  },
+};
 
 const fashionStories = [
   {
@@ -124,16 +140,21 @@ const fashionStories = [
 ];
 
 
-const FashionHome = () => (
-  <FashionStoryPage
-    title="Fashion"
-    stories={fashionStories}
-    closing={{
-      eyebrow: "A point of view",
-      title: "Style is personal.",
-      italic: "Fashion is a statement.",
-    }}
-  />
-);
+const FashionHome = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
+
+  return (
+    <FashionStoryPage
+      title={t.title}
+      stories={fashionStories}
+      closing={{
+        eyebrow: t.closingEyebrow,
+        title: t.closingTitle,
+        italic: t.closingItalic,
+      }}
+    />
+  );
+};
 
 export default FashionHome;

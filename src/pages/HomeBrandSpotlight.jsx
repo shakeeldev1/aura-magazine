@@ -1,7 +1,38 @@
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../common/language";
 import { StoryImage } from "../common/ui";
 
+const copy = {
+  EN: {
+    eyebrow: "The Insolite Spotlight",
+    titleA: "Style is",
+    titleB: "an attitude.",
+    bodyA:
+      "Fashion is more than what you wear. It is the confidence you carry, the details you choose, and the story you tell without saying a word.",
+    bodyB:
+      "Discover a world of expressive looks, timeless elegance, and unexpected inspiration with Insolite Magazine.",
+    caption: "The Art of Style",
+    cta: "Discover our world",
+    alt: "Luxury fashion editorial",
+  },
+  FR: {
+    eyebrow: "La sélection Insolite",
+    titleA: "Le style est",
+    titleB: "une attitude.",
+    bodyA:
+      "La mode, c’est bien plus que ce que l’on porte. C’est la confiance que l’on dégage, les détails que l’on choisit et l’histoire que l’on raconte sans un mot.",
+    bodyB:
+      "Découvrez un monde de looks expressifs, d’élégance intemporelle et d’inspirations inattendues avec Insolite Magazine.",
+    caption: "L’art du style",
+    cta: "Découvrir notre univers",
+    alt: "Portrait éditorial de mode de luxe",
+  },
+};
+
 const HomeBrandSpotlight = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
+
   return (
     <section className="bg-linen">
       <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-2 md:gap-16 md:py-28 lg:px-12">
@@ -10,40 +41,33 @@ const HomeBrandSpotlight = () => {
           <div className="aspect-[4/5] overflow-hidden bg-ivory">
             <StoryImage
               src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85"
-              alt="Luxury fashion editorial"
+              alt={t.alt}
               className="h-full w-full object-cover img-tone"
             />
           </div>
 
           <p className="absolute bottom-6 left-0 bg-ivory px-5 py-3 font-serif text-lg italic sm:px-6 sm:py-4 sm:text-xl">
-            The Art of Style
+            {t.caption}
           </p>
         </div>
 
         {/* Content */}
         <div className="max-w-xl md:pl-4">
-          <p className="eyebrow text-stone">The Insolite Spotlight</p>
+          <p className="eyebrow text-stone">{t.eyebrow}</p>
 
           <h2 className="mt-6 font-serif text-5xl leading-[0.98] sm:text-6xl lg:text-7xl">
-            Style is
-            <span className="block italic text-oxblood">an attitude.</span>
+            {t.titleA}
+            <span className="block italic text-oxblood">{t.titleB}</span>
           </h2>
 
           <div className="mt-8 h-px w-16 bg-ink" />
 
-          <p className="mt-8 font-sans text-base leading-8 text-stone">
-            Fashion is more than what you wear. It is the confidence
-            you carry, the details you choose, and the story you tell
-            without saying a word.
-          </p>
+          <p className="mt-8 font-sans text-base leading-8 text-stone">{t.bodyA}</p>
 
-          <p className="mt-5 font-sans text-base leading-8 text-stone">
-            Discover a world of expressive looks, timeless elegance,
-            and unexpected inspiration with Insolite Magazine.
-          </p>
+          <p className="mt-5 font-sans text-base leading-8 text-stone">{t.bodyB}</p>
 
           <a href="#fashion" className="link-line mt-10">
-            Discover our world
+            {t.cta}
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
           </a>
         </div>

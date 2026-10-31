@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useLanguage } from "../common/language";
 import { StoryImage } from "../common/ui";
 
 const fashionStories = [
@@ -76,6 +77,33 @@ const fashionStories = [
   },
 ];
 
+const copy = {
+  EN: {
+    label: "The Fashion Edit",
+    eyebrow: "Curated for you",
+    titleA: "The Fashion",
+    titleB: "Edit.",
+    intro: "The latest looks, statement pieces, and personal style moments worth saving.",
+    slideOf: (n, total) => `${n} of ${total}`,
+    showStory: (n) => `Show story ${n}`,
+    prev: "Previous stories",
+    next: "Next stories",
+    all: "Explore all fashion stories",
+  },
+  FR: {
+    label: "La sélection mode",
+    eyebrow: "Choisi pour vous",
+    titleA: "La sélection",
+    titleB: "Mode.",
+    intro: "Les looks du moment, pièces phares et moments de style à garder.",
+    slideOf: (n, total) => `${n} sur ${total}`,
+    showStory: (n) => `Afficher l’histoire ${n}`,
+    prev: "Histoires précédentes",
+    next: "Histoires suivantes",
+    all: "Voir toutes les histoires mode",
+  },
+};
+
 const AUTOPLAY_DELAY = 5000;
 
 const prefersReducedMotion = () =>
@@ -85,6 +113,8 @@ const isAtEnd = (track) =>
   track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
 
 const HomeFashion = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -156,7 +186,7 @@ const HomeFashion = () => {
     <section
       id="fashion"
       aria-roledescription="carousel"
-      aria-label="The Fashion Edit"
+      aria-label={t.label}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -167,17 +197,14 @@ const HomeFashion = () => {
         {/* Heading */}
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="eyebrow text-stone">Curated for you</p>
+            <p className="eyebrow text-stone">{t.eyebrow}</p>
 
             <h2 className="mt-5 font-serif text-5xl leading-none sm:text-6xl lg:text-7xl">
-              The Fashion <em className="italic text-oxblood">Edit.</em>
+              {t.titleA} <em className="italic text-oxblood">{t.titleB}</em>
             </h2>
           </div>
 
-          <p className="max-w-sm font-sans text-sm leading-7 text-stone">
-            The latest looks, statement pieces, and personal style
-            moments worth saving.
-          </p>
+          <p className="max-w-sm font-sans text-sm leading-7 text-stone">{t.intro}</p>
         </div>
 
         {/* Track */}
@@ -190,7 +217,7 @@ const HomeFashion = () => {
             <article
               key={story.number}
               aria-roledescription="slide"
-              aria-label={`${index + 1} of ${fashionStories.length}`}
+              aria-label={t.slideOf(index + 1, fashionStories.length)}
               className="group w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-linen">
@@ -227,7 +254,7 @@ const HomeFashion = () => {
                 key={story.number}
                 type="button"
                 onClick={() => scrollToCard(index)}
-                aria-label={`Show story ${index + 1}`}
+                aria-label={t.showStory(index + 1)}
                 aria-current={activeIndex === index}
                 className="group flex h-8 items-center"
               >
@@ -246,7 +273,7 @@ const HomeFashion = () => {
             <button
               type="button"
               onClick={showPrevious}
-              aria-label="Previous stories"
+              aria-label={t.prev}
               className="flex h-10 w-10 items-center justify-center border border-ink/20 transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
             >
               <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
@@ -255,7 +282,7 @@ const HomeFashion = () => {
             <button
               type="button"
               onClick={showNext}
-              aria-label="Next stories"
+              aria-label={t.next}
               className="flex h-10 w-10 items-center justify-center border border-ink/20 transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
             >
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -265,7 +292,7 @@ const HomeFashion = () => {
 
         <div className="mt-14 text-center">
           <Link to="/fashion" className="link-line">
-            Explore all fashion stories
+            {t.all}
           </Link>
         </div>
       </div>

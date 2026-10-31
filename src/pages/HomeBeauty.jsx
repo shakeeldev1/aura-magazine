@@ -1,4 +1,22 @@
+import { useLanguage } from "../common/language";
 import { StoryImage } from "../common/ui";
+
+const copy = {
+  EN: {
+    eyebrow: "The art of self-care",
+    titleA: "Beauty",
+    titleB: "Edit.",
+    intro:
+      "A curated world of beauty, skincare and the little rituals that make you feel extraordinary.",
+  },
+  FR: {
+    eyebrow: "L’art du soin de soi",
+    titleA: "Sélection",
+    titleB: "Beauté.",
+    intro:
+      "Un univers de beauté, de soins et de petits rituels qui vous font vous sentir extraordinaire.",
+  },
+};
 
 const beautyStories = [
   {
@@ -31,22 +49,22 @@ const beautyStories = [
 ];
 
 const HomeBeauty = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
+
   return (
     <section id="beauty" className="bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col justify-between gap-6 border-b border-ink/15 pb-8 md:flex-row md:items-end">
           <div>
-            <p className="eyebrow text-stone">The art of self-care</p>
+            <p className="eyebrow text-stone">{t.eyebrow}</p>
 
             <h2 className="mt-5 font-serif text-5xl leading-none sm:text-6xl lg:text-7xl">
-              Beauty <em className="italic text-stone">Edit.</em>
+              {t.titleA} <em className="italic text-stone">{t.titleB}</em>
             </h2>
           </div>
 
-          <p className="max-w-xs font-sans text-sm leading-7 text-stone">
-            A curated world of beauty, skincare and the little rituals that
-            make you feel extraordinary.
-          </p>
+          <p className="max-w-xs font-sans text-sm leading-7 text-stone">{t.intro}</p>
         </div>
 
         <div className="mt-14 grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">

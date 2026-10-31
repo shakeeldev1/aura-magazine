@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../common/language";
+import { useDocumentTitle } from "../common/useDocumentTitle";
 
 const copy = {
   EN: {
@@ -17,6 +18,8 @@ const copy = {
 const Forthcoming = ({ page }) => {
   const { lang } = useLanguage();
   const t = copy[lang];
+
+  useDocumentTitle(page.title[lang]);
 
   return (
     <main className="flex min-h-[70vh] flex-col items-center justify-center px-5 py-24 text-center sm:px-8">

@@ -1,4 +1,18 @@
+import { useLanguage } from "../common/language";
 import { StoryImage } from "../common/ui";
+
+const copy = {
+  EN: {
+    eyebrow: "Fashion Around the World",
+    title: "The Latest",
+    edition: "Global Style Edition",
+  },
+  FR: {
+    eyebrow: "La mode autour du monde",
+    title: "Les dernières",
+    edition: "Édition style mondial",
+  },
+};
 
 const latestStories = [
   {
@@ -40,20 +54,23 @@ const latestStories = [
 ];
 
 const HomeLatestGrid = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
+
   return (
     <section id="latest" className="bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         {/* Heading */}
         <div className="flex flex-col gap-5 border-b border-ink pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow text-stone">Fashion Around the World</p>
+            <p className="eyebrow text-stone">{t.eyebrow}</p>
 
             <h2 className="mt-5 font-serif text-6xl leading-none sm:text-7xl lg:text-8xl">
-              The Latest
+              {t.title}
             </h2>
           </div>
 
-          <p className="eyebrow text-stone">Global Style Edition</p>
+          <p className="eyebrow text-stone">{t.edition}</p>
         </div>
 
         {/* Grid */}

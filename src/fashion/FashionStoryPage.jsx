@@ -1,13 +1,28 @@
 import { NavLink } from "react-router-dom";
+import { useLanguage } from "../common/language";
 import { StoryImage } from "../common/ui";
+import { useDocumentTitle } from "../common/useDocumentTitle";
 
-const sections = [
-  { label: "All", to: "/fashion", end: true },
-  { label: "Runway", to: "/fashion/runway" },
-  { label: "Street Style", to: "/fashion/street-style" },
-  { label: "Trends", to: "/fashion/trends" },
-  { label: "Editor's Picks", to: "/fashion/editors-picks" },
-];
+const copy = {
+  EN: {
+    navLabel: "Fashion sections",
+    all: "All",
+    runway: "Runway",
+    street: "Street Style",
+    trends: "Trends",
+    picks: "Editor's Picks",
+    count: "Fashion",
+  },
+  FR: {
+    navLabel: "Sections mode",
+    all: "Tout",
+    runway: "Défilés",
+    street: "Street Style",
+    trends: "Tendances",
+    picks: "Choix de la rédaction",
+    count: "Mode",
+  },
+};
 
 // Stories are either full image URLs or Unsplash photo IDs.
 const imageUrl = (image) =>
@@ -15,40 +30,54 @@ const imageUrl = (image) =>
     ? image
     : `https://images.unsplash.com/${image}?auto=format&fit=crop&w=900&q=85`;
 
-const FashionSubnav = () => (
-  <nav aria-label="Fashion sections" className="border-y border-ink/15">
-    <ul className="no-scrollbar mx-auto flex max-w-[1440px] gap-7 overflow-x-auto px-5 sm:px-8 md:justify-center md:gap-14 lg:px-12">
-      {sections.map((item) => (
-        <li key={item.to} className="shrink-0">
-          <NavLink
-            to={item.to}
-            end={item.end}
-            className={({ isActive }) =>
-              `group relative inline-block py-5 font-sans text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
-                isActive ? "text-ink" : "text-stone hover:text-ink"
-              }`
-            }
-          >
-            {({ isActive }) => (
-              <>
-                {item.label}
-                <span
-                  aria-hidden="true"
-                  className={`absolute inset-x-0 bottom-0 h-px bg-ink transition-transform duration-500 ease-luxe ${
-                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </>
-            )}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
+const FashionSubnav = ({ t }) => {
+  const sections = [
+    { label: t.all, to: "/fashion", end: true },
+    { label: t.runway, to: "/fashion/runway" },
+    { label: t.street, to: "/fashion/street-style" },
+    { label: t.trends, to: "/fashion/trends" },
+    { label: t.picks, to: "/fashion/editors-picks" },
+  ];
+
+  return (
+    <nav aria-label={t.navLabel} className="border-y border-ink/15">
+      <ul className="no-scrollbar mx-auto flex max-w-[1440px] gap-7 overflow-x-auto px-5 sm:px-8 md:justify-center md:gap-14 lg:px-12">
+        {sections.map((item) => (
+          <li key={item.to} className="shrink-0">
+            <NavLink
+              to={item.to}
+              end={item.end}
+              className={({ isActive }) =>
+                `group relative inline-block py-5 font-sans text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
+                  isActive ? "text-ink" : "text-stone hover:text-ink"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {item.label}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-0 bottom-0 h-px bg-ink transition-transform duration-500 ease-luxe ${
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  />
+                </>
+              )}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 const FashionStoryPage = ({ eyebrow, title, description, stories, closing }) => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
   const count = String(stories.length).padStart(2, "0");
+
+  useDocumentTitle(title);
 
   return (
     <main className="bg-ivory">
@@ -69,13 +98,13 @@ const FashionStoryPage = ({ eyebrow, title, description, stories, closing }) => 
         )}
       </header>
 
-      <FashionSubnav />
+      <FashionSubnav t={t} />
 
       {/* Stories */}
       <section className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 md:py-20 lg:px-12">
         <div className="mb-12 flex items-center justify-between border-b border-ink/15 pb-5">
           <p className="font-sans text-[10px] font-medium tracking-[0.25em] text-stone uppercase">
-            Fashion / 01–{count}
+            {t.count} / 01–{count}
           </p>
         </div>
 

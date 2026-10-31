@@ -1,4 +1,10 @@
+import { useLanguage } from "../common/language";
 import { StoryImage } from "../common/ui";
+
+const copy = {
+  EN: { eyebrow: "The Style Report", titleA: "In", titleB: "Out" },
+  FR: { eyebrow: "Le rapport de style", titleA: "Dans", titleB: "Hors" },
+};
 
 const stories = [
   {
@@ -20,15 +26,18 @@ const stories = [
 ];
 
 const HomeInandOut = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
+
   return (
     <section id="in-out" className="bg-ink py-20 text-ivory md:py-28">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-14 flex flex-col gap-5 border-b border-ivory/15 pb-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="eyebrow text-ivory/55">The Style Report</p>
+            <p className="eyebrow text-ivory/55">{t.eyebrow}</p>
 
             <h2 className="mt-5 font-serif text-6xl leading-none sm:text-7xl lg:text-8xl">
-              In <em className="italic text-ivory/60">&amp;</em> Out
+              {t.titleA} <em className="italic text-ivory/60">&amp;</em> {t.titleB}
             </h2>
           </div>
         </div>

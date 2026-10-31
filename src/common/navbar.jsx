@@ -12,6 +12,7 @@ const copy = {
     subscribe: "Subscribe",
     menuSubscribe: "Subscribe to the magazine",
     menuLabel: "Site menu",
+    issue: "Issue N° 01 — Autumn / Winter 2026",
   },
   FR: {
     openMenu: "Ouvrir le menu",
@@ -19,6 +20,7 @@ const copy = {
     subscribe: "S'abonner",
     menuSubscribe: "S'abonner au magazine",
     menuLabel: "Menu du site",
+    issue: "Numéro 01 — Automne / Hiver 2026",
   },
 };
 
@@ -151,7 +153,7 @@ const Navbar = () => {
             |
           </span>
           <span className="hidden text-ivory/60 sm:inline">
-            Issue N° 01 — Autumn / Winter 2026
+            {t.issue}
           </span>
         </div>
 

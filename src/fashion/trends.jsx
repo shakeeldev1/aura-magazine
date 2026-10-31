@@ -1,4 +1,22 @@
 import FashionStoryPage from "./FashionStoryPage";
+import { useLanguage } from "../common/language";
+
+const copy = {
+  EN: {
+    eyebrow: "What's next in fashion",
+    title: "Trends",
+    description: "The colors, silhouettes, and defining details shaping the season ahead.",
+    closingEyebrow: "The trend report",
+    closingTitle: "The season starts here.",
+  },
+  FR: {
+    eyebrow: "Ce qui arrive dans la mode",
+    title: "Tendances",
+    description: "Les couleurs, silhouettes et détails qui façonnent la saison à venir.",
+    closingEyebrow: "Le rapport de tendances",
+    closingTitle: "La saison commence ici.",
+  },
+};
 
 const trendStories = [
   { title: "The Trends Defining This Season", category: "TREND REPORT", image: "photo-1539109136881-3be0616acf4b" },
@@ -24,17 +42,19 @@ const trendStories = [
 ];
 
 
-const Trends = () => (
-  <FashionStoryPage
-    eyebrow="What's next in fashion"
-    title="Trends"
-    description="The colors, silhouettes, and defining details shaping the season ahead."
-    stories={trendStories}
-    closing={{
-      eyebrow: "The trend report",
-      title: "The season starts here.",
-    }}
-  />
-);
+const Trends = () => {
+  const { lang } = useLanguage();
+  const t = copy[lang];
+
+  return (
+    <FashionStoryPage
+      eyebrow={t.eyebrow}
+      title={t.title}
+      description={t.description}
+      stories={trendStories}
+      closing={{ eyebrow: t.closingEyebrow, title: t.closingTitle }}
+    />
+  );
+};
 
 export default Trends;

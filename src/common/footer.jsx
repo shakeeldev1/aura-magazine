@@ -23,6 +23,7 @@ const content = {
     subscribe: "Subscribe",
     privacy: "By subscribing, you agree to our Privacy Policy.",
     success: "Thank you. You are now on the list.",
+    location: "Paris · Fashion · Culture",
     rights: "All rights reserved.",
     policy: "Privacy Policy",
     terms: "Terms & Conditions",
@@ -44,6 +45,7 @@ const content = {
     privacy:
       "En vous inscrivant, vous acceptez notre politique de confidentialité.",
     success: "Merci. Vous êtes désormais sur la liste.",
+    location: "Paris · Mode · Culture",
     rights: "Tous droits réservés.",
     policy: "Confidentialité",
     terms: "Conditions générales",
@@ -84,7 +86,7 @@ const Footer = () => {
             </p>
 
             <p className="mt-6 font-sans text-[10px] tracking-[0.25em] text-ivory/45 uppercase">
-              Paris · Fashion · Culture
+              {t.location}
             </p>
           </div>
 
