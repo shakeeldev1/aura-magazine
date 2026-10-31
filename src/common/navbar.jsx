@@ -159,7 +159,7 @@ const Navbar = () => {
         </div>
 
         {/* Main row */}
-        <div className="mx-auto grid h-20 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 md:h-24 lg:px-12">
+        <div className="mx-auto grid h-24 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 md:h-28 lg:px-12">
           <div className="flex items-center">
             <LanguageSwitch className="hidden md:flex" />
 
