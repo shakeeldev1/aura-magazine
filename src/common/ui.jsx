@@ -9,8 +9,8 @@ export const Logo = ({ size = "sm" }) => {
       <span
         className={
           large
-            ? "pl-[0.22em] font-serif font-semibold text-5xl leading-none tracking-[0.22em] uppercase sm:text-6xl"
-            : "pl-[0.22em] font-serif font-semibold text-2xl leading-none tracking-[0.22em] uppercase md:text-3xl"
+            ? "pl-[0.14em] font-serif font-bold text-5xl leading-none tracking-[0.14em] uppercase sm:text-6xl"
+            : "pl-[0.14em] font-serif font-bold text-2xl leading-none tracking-[0.14em] uppercase md:text-3xl"
         }
       >
         INSOLITE
@@ -19,8 +19,8 @@ export const Logo = ({ size = "sm" }) => {
       <span
         className={
           large
-            ? "mt-3 whitespace-nowrap text-[10px] tracking-[0.3em] uppercase opacity-70"
-            : "mt-1.5 whitespace-nowrap text-[8px] tracking-[0.3em] uppercase opacity-70 md:text-[9px] md:tracking-[0.4em]"
+            ? "mt-3 whitespace-nowrap text-[11px] font-medium tracking-[0.25em] uppercase"
+            : "mt-1.5 whitespace-nowrap text-[9px] font-medium tracking-[0.2em] uppercase md:text-[10px] md:tracking-[0.25em]"
         }
       >
         Magazine x Khim Asriel
