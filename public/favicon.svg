@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <rect width="100" height="100" fill="#702632" />
-  <text x="50" y="68" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="600" font-size="58" fill="#F8F5F0">I</text>
+  <g fill="#F8F5F0">
+    <path d="M30 33C30 16 70 14 70 36C70 50 52 52 50 64" fill="none" stroke="#F8F5F0" stroke-width="13" />
+    <path d="M50 66L61 74L57 88H43L39 74Z" />
+  </g>
 </svg>

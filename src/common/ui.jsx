@@ -6,6 +6,17 @@ export const Logo = ({ size = "sm" }) => {
 
   return (
     <span className="flex flex-col items-center">
+      <svg
+        viewBox="0 0 100 100"
+        fill="currentColor"
+        aria-hidden="true"
+        className={
+          large ? "mb-3 h-10 w-10 sm:h-12 sm:w-12" : "mb-1.5 h-7 w-7 md:h-8 md:w-8"
+        }
+      >
+        <path d="M30 33C30 16 70 14 70 36C70 50 52 52 50 64" fill="none" stroke="currentColor" strokeWidth="13" />
+        <path d="M50 66L61 74L57 88H43L39 74Z" />
+      </svg>
       <span
         className={
           large
@@ -19,8 +30,8 @@ export const Logo = ({ size = "sm" }) => {
       <span
         className={
           large
-            ? "mt-3 whitespace-nowrap text-[11px] font-medium tracking-[0.25em] uppercase"
-            : "mt-1.5 whitespace-nowrap text-[9px] font-medium tracking-[0.2em] uppercase md:text-[10px] md:tracking-[0.25em]"
+            ? "mt-3 whitespace-nowrap text-[11px] font-semibold tracking-[0.25em] uppercase"
+            : "mt-1.5 whitespace-nowrap text-[9px] font-semibold tracking-[0.2em] uppercase md:text-[10px] md:tracking-[0.25em]"
         }
       >
         Magazine x Khim Asriel
