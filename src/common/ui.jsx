@@ -22,22 +22,22 @@ export const Logo = ({ size = "sm" }) => {
       <span
         aria-hidden="true"
         className={
-          large ? "mb-3 block h-10 w-6 bg-current sm:h-12 sm:w-7" : "mb-1 block h-6 w-[15px] bg-current md:h-7 md:w-[17px]"
+          large ? "mb-2 block h-8 w-5 bg-current sm:h-10 sm:w-6" : "mb-0.5 block h-5 w-[12px] bg-current md:h-6 md:w-[15px]"
         }
         style={maskStyle("/question-mark.png")}
       />
       <span
         role="img"
         aria-label="INSOLITE"
-        className={large ? "block h-14 bg-current sm:h-16" : "block h-8 bg-current md:h-10"}
+        className={large ? "block h-14 bg-current sm:h-16" : "block h-10 bg-current md:h-12"}
         style={{ ...maskStyle("/wordmark-insolite.png"), aspectRatio: "4.3" }}
       />
 
       <span
         className={
           large
-            ? "mt-3 whitespace-nowrap text-[12px] font-semibold tracking-[0.22em] uppercase"
-            : "mt-1.5 whitespace-nowrap text-[10px] font-semibold tracking-[0.18em] uppercase md:text-[11px] md:tracking-[0.22em]"
+            ? "mt-3 whitespace-nowrap text-[11px] font-semibold tracking-[0.2em] uppercase"
+            : "mt-1.5 whitespace-nowrap text-[9px] font-semibold tracking-[0.2em] uppercase md:text-[10px] md:tracking-[0.22em]"
         }
       >
         Magazine x Khim Asriel
