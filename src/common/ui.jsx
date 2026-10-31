@@ -8,17 +8,14 @@ export const Logo = ({ size = "sm" }) => {
     <span className="flex flex-col items-center">
       <svg
         viewBox="0 0 100 100"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="6"
+        fill="currentColor"
         aria-hidden="true"
         className={
           large ? "mb-3 h-10 w-10 sm:h-12 sm:w-12" : "mb-1.5 h-7 w-7 md:h-8 md:w-8"
         }
       >
-        <polygon points="50,10 90,85 10,85" />
-        <polygon points="50,40 70,75 30,75" fill="currentColor" opacity="0.15" />
-        <circle cx="50" cy="60" r="4" fill="currentColor" />
+        <path d="M14 88V48A32 32 0 0 1 46 16V88Z" />
+        <path transform="translate(0 10)" d="M54 16A32 32 0 0 1 86 48V88H54Z" />
       </svg>
 
       <span
