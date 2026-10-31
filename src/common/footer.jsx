@@ -3,6 +3,7 @@ import { useLanguage } from "./language";
 import { categories } from "./navigation";
 import NewsletterForm from "./NewsletterForm";
 import { LanguageSwitch, Logo } from "./ui";
+import { siteConfig } from "./siteConfig";
 
 const currentYear = new Date().getFullYear();
 
@@ -23,6 +24,8 @@ const content = {
     subscribe: "Subscribe",
     privacy: "By subscribing, you agree to our Privacy Policy.",
     success: "Thank you. You are now on the list.",
+    error: "Something went wrong. Please try again.",
+    unavailable: "Sign-up is not available yet. Please try again later.",
     location: "Paris · Fashion · Culture",
     rights: "All rights reserved.",
     policy: "Privacy Policy",
@@ -45,6 +48,8 @@ const content = {
     privacy:
       "En vous inscrivant, vous acceptez notre politique de confidentialité.",
     success: "Merci. Vous êtes désormais sur la liste.",
+    error: "Une erreur est survenue. Merci de réessayer.",
+    unavailable: "L’inscription n’est pas encore disponible. Merci de réessayer plus tard.",
     location: "Paris · Mode · Culture",
     rights: "Tous droits réservés.",
     policy: "Confidentialité",
@@ -123,21 +128,25 @@ const Footer = () => {
                 </Link>
               </li>
 
-              <li>
-                <a href="mailto:contact@auramagazine.com" className={footerLink}>
-                  {t.contact}
-                </a>
-              </li>
+              {siteConfig.contactEmail && (
+                <li>
+                  <a href={`mailto:${siteConfig.contactEmail}`} className={footerLink}>
+                    {t.contact}
+                  </a>
+                </li>
+              )}
             </ul>
 
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-8 inline-block font-sans text-[10px] tracking-[0.22em] text-ivory/80 uppercase transition-colors duration-300 hover:text-ivory"
-            >
-              Instagram ↗
-            </a>
+            {siteConfig.instagramUrl && (
+              <a
+                href={siteConfig.instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 inline-block font-sans text-[10px] tracking-[0.22em] text-ivory/80 uppercase transition-colors duration-300 hover:text-ivory"
+              >
+                Instagram ↗
+              </a>
+            )}
           </div>
 
           <div className="lg:col-span-3">
@@ -157,6 +166,8 @@ const Footer = () => {
                 subscribe: t.subscribe,
                 privacy: t.privacy,
                 success: t.success,
+                error: t.error,
+                unavailable: t.unavailable,
               }}
             />
           </div>

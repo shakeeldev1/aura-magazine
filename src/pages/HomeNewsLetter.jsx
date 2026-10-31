@@ -10,6 +10,8 @@ const copy = {
     subscribe: "Subscribe",
     privacy: "By subscribing, you agree to receive magazine updates by email.",
     success: "Thank you. You are now on the list.",
+    error: "Something went wrong. Please try again.",
+    unavailable: "Sign-up is not available yet. Please try again later.",
   },
   FR: {
     eyebrow: "L’édition du magazine",
@@ -19,6 +21,8 @@ const copy = {
     subscribe: "S’inscrire",
     privacy: "En vous inscrivant, vous acceptez de recevoir les actualités du magazine par e-mail.",
     success: "Merci. Vous êtes désormais sur la liste.",
+    error: "Une erreur est survenue. Merci de réessayer.",
+    unavailable: "L’inscription n’est pas encore disponible. Merci de réessayer plus tard.",
   },
 };
 
@@ -47,6 +51,8 @@ const HomeNewsLetter = () => {
             subscribe: t.subscribe,
             privacy: t.privacy,
             success: t.success,
+            error: t.error,
+            unavailable: t.unavailable,
           }}
         />
       </div>

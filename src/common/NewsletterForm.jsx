@@ -1,20 +1,51 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { siteConfig } from "./siteConfig";
 
 // Designed for dark backgrounds (ink or oxblood).
+// Posts { email } to siteConfig.newsletterEndpoint. The success message only shows once the
+// endpoint has accepted the address. Without an endpoint, the form says sign-up is not
+// available yet instead of pretending the address was saved.
 const NewsletterForm = ({ id, labels, className = "" }) => {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | done | error | unavailable
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email.trim()) return;
+    const address = email.trim();
 
-    // Connect your newsletter service here.
-    console.log("Newsletter email:", email);
-    setEmail("");
-    setSubscribed(true);
+    if (!address || status === "sending") return;
+
+    if (!siteConfig.newsletterEndpoint) {
+      setStatus("unavailable");
+      return;
+    }
+
+    setStatus("sending");
+
+    try {
+      const response = await fetch(siteConfig.newsletterEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: address }),
+      });
+
+      if (!response.ok) throw new Error(`Sign-up failed with status ${response.status}`);
+
+      setEmail("");
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const messages = {
+    idle: labels.privacy,
+    sending: labels.privacy,
+    done: labels.success,
+    error: labels.error,
+    unavailable: labels.unavailable,
   };
 
   return (
@@ -31,7 +62,7 @@ const NewsletterForm = ({ id, labels, className = "" }) => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            setSubscribed(false);
+            if (status !== "sending") setStatus("idle");
           }}
           placeholder={labels.placeholder}
           className="min-w-0 flex-1 bg-transparent font-sans text-base text-ivory outline-none placeholder:text-ivory/55 sm:text-sm"
@@ -39,7 +70,8 @@ const NewsletterForm = ({ id, labels, className = "" }) => {
 
         <button
           type="submit"
-          className="inline-flex shrink-0 items-center gap-2 font-sans text-[10px] font-medium tracking-[0.22em] text-ivory uppercase transition-opacity duration-300 hover:opacity-70"
+          disabled={status === "sending"}
+          className="inline-flex shrink-0 items-center gap-2 font-sans text-[10px] font-medium tracking-[0.22em] text-ivory uppercase transition-opacity duration-300 hover:opacity-70 disabled:opacity-50"
         >
           {labels.subscribe}
           <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
@@ -51,7 +83,7 @@ const NewsletterForm = ({ id, labels, className = "" }) => {
         aria-live="polite"
         className="mt-4 min-h-4 font-sans text-xs leading-5 text-ivory/70"
       >
-        {subscribed ? labels.success : labels.privacy}
+        {messages[status]}
       </p>
     </form>
   );
